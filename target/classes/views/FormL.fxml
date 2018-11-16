@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FormLController">
+   <children>
+      <TabPane prefHeight="800.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Часть А">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.23919308357348704, 0.3025936599423631, 0.4250720461095101, 0.5994236311239193, 0.8126801152737753" orientation="VERTICAL" prefHeight="200.0" prefWidth="440.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="494.0" prefWidth="438.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="1. Первому по прядку члену домохозяйства&#10;отметьте &quot;записан первым&quot;. Остальным &#10;отметьте, кем он(она) является для записанного первым." />
+                                          <Label fx:id="firstLabel" disable="true" layoutX="23.0" layoutY="106.0" text="Запишите кто это:" />
+                                          <TextField fx:id="whoItIsTextField" disable="true" layoutY="123.0" prefWidth="300.0" />
+                                          <ComboBox fx:id="relationsComboBox" layoutX="14.0" layoutY="56.0" prefWidth="150.0" />
+                                          <Label fx:id="secondLabel" disable="true" layoutX="2.0" layoutY="148.0" text="Например, опекаемый ребенок, наемный работник и т.д." />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="2. Ваш пол" />
+                                          <ComboBox fx:id="sexComboBox" layoutX="207.0" layoutY="7.0" prefWidth="150.0" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="438.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="3. Дата вашего рождения" />
+                                          <TextField fx:id="dayTextField" layoutX="10.0" layoutY="50.0" prefWidth="40.0" />
+                                          <TextField fx:id="monthTextField" layoutX="60.0" layoutY="50.0" prefWidth="40.0" />
+                                          <TextField fx:id="yearTextField" layoutX="110.0" layoutY="50.0" prefWidth="80.0" />
+                                          <TextField fx:id="ageTextField" layoutX="230.0" layoutY="50.0" onKeyReleased="#areYouStudying" prefWidth="40.0" />
+                                          <Label layoutX="13.0" layoutY="30.0" text="Число" />
+                                          <Label layoutX="62.0" layoutY="30.0" text="Месяц" />
+                                          <Label layoutX="140.0" layoutY="30.0" text="Год" />
+                                          <Label layoutX="229.0" layoutY="30.0" text="Возраст" />
+                                          <Label fx:id="errorLabel" layoutX="183.0" layoutY="5.0" text="Невозможная дата/возраст. Проверьте данные" textFill="RED" visible="false" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="438.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="birthplaceTextField" layoutX="10.0" layoutY="20.0" />
+                                          <Label text="4. Место вашего рождения" />
+                                          <Label layoutX="5.0" layoutY="45.0" text="Запишите наименование края, республики, области, авт. области, авт. округа,&#10;г. Москва, г. Санкт-Петербург для России (в том числе РСФСР) или &#10;наименование иностранного государства, которое оно имело на момент &#10;рождения опрашиваемого (в том числе республик бывшего СССР)&#10;" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="438.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" text="Для лиц, достигших 16 лет и более и лиц младше 16 лет, состоящих в браке" />
+                                          <Label layoutX="5.0" layoutY="15.0" text="5. Состояние в браке" />
+                                          <Label fx:id="thirdLabel" disable="true" layoutX="169.0" layoutY="18.0" prefHeight="38.0" prefWidth="91.0" text="Зарегестрирован&#10;ли ваш брак?" />
+                                          <ComboBox fx:id="registratedComboBox" disable="true" layoutX="274.0" layoutY="25.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="marriageComboBox" layoutX="5.0" layoutY="37.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="217.0" prefWidth="438.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="6. Ваше гражданство" />
+                                          <Label fx:id="fourthLabel" disable="true" layoutX="10.0" layoutY="40.0" text="Для граждан иностранного государства и лиц с двойным&#10;гражданством запишите наименование государства" />
+                                          <TextField fx:id="doubleCitizenshipTextField" disable="true" layoutX="300.0" layoutY="40.0" />
+                                          <ComboBox fx:id="citizenshipComboBox" layoutX="120.0" layoutY="10.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <SplitPane dividerPositions="0.09622886866059818, 0.40312093628088425, 0.4967490247074122, 0.5851755526657998, 0.6749024707412223, 0.7594278283485045, 0.9206762028608583" orientation="VERTICAL" prefHeight="200.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="7. Национальная принадлежность" />
+                                          <Label layoutX="10.0" layoutY="15.0" text="По самоопределению в соответствии со ст. 26 Конституции РФ" />
+                                          <TextField fx:id="nationTextField" layoutX="10.0" layoutY="35.0" prefWidth="250.0" />
+                                          <CheckBox fx:id="noAnswerCheckBox" layoutX="270.0" layoutY="30.0" mnemonicParsing="false" onAction="#noAnswerCheckBoxOnClick" text="Отказ от &#10;ответа" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="230.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="8. Образование и обучение" />
+                                          <Label layoutX="5.0" layoutY="20.0" text="Для лиц в возрасте 10 лет и более" />
+                                          <Label layoutX="5.0" layoutY="35.0" text="8.1 Ваше образование" />
+                                          <Label layoutX="5.0" layoutY="45.0" text="Отметьте только один вариант, соответсвующий&#10;наивысшему уровню полученного образования" />
+                                          <Label fx:id="sixthLabel" disable="true" layoutX="220.0" layoutY="190.0" text="Умеете ли вы &#10;читать и писать?" />
+                                          <ComboBox fx:id="educationComboBox" layoutX="-10.0" layoutY="88.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="readAndWriteComboBox" disable="true" layoutX="65.0" layoutY="195.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="educationTypeComboBox" disable="true" layoutX="189.0" layoutY="66.0" prefWidth="150.0" />
+                                       </children>
+                                    </Pane>
+                                    <Label fx:id="fifthLabel" disable="true" layoutX="175.0" layoutY="97.0" text="Окончившим &#10;вуз до &#10;1995 года&#10;отмечать&#10;&quot;специалист&quot;&#10;" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="seventhLabel" disable="true" layoutX="5.0" layoutY="5.0" text="Для лиц с высшим и послевузовским профессиональным образованием" />
+                                          <Label fx:id="eighthLabel" disable="true" layoutX="5.0" layoutY="20.0" text="8.2 Имеете ли вы ученую степень кандидата или доктора наук?" />
+                                          <ComboBox fx:id="degreeComboBox" disable="true" layoutX="14.0" layoutY="40.0" prefWidth="150.0" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="ninthLabel" disable="true" layoutX="5.0" layoutY="5.0" text="Для лиц 6-50 лет" />
+                                          <Label fx:id="tenthLabel" disable="true" layoutX="5.0" layoutY="20.0" text="8.3 Учитесь ли вы в образовательном учреждении?" />
+                                          <ComboBox fx:id="areYouStudyingComboBox" disable="true" layoutX="14.0" layoutY="36.0" onAction="#areYouInKindergarden" prefWidth="150.0" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="eleventhLabel" disable="true" layoutX="5.0" layoutY="5.0" text="Для детей до 10 лет, не посещавших школу" />
+                                          <Label fx:id="twelfthLabel" disable="true" layoutX="5.0" layoutY="20.0" text="8.4 Посещает ли ребенок дошкольное учреждение?" />
+                                          <ComboBox fx:id="kindergardenComboBox" disable="true" layoutX="14.0" layoutY="37.0" prefWidth="150.0" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="20.0" text="9.1 Владеете ли вы русским языком?" />
+                                          <Label layoutX="5.0" layoutY="5.0" text="9. Владение языками" />
+                                          <ComboBox fx:id="russianComboBox" layoutX="5.0" layoutY="33.0" prefWidth="150.0" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="firstLanguageTextField" layoutX="10.0" layoutY="25.0" prefWidth="250.0" />
+                                          <TextField fx:id="secondLanguageTextField" layoutX="10.0" layoutY="55.0" prefWidth="250.0" />
+                                          <TextField fx:id="thirdLanguageTextField" layoutX="10.0" layoutY="85.0" prefWidth="250.0" />
+                                          <Label layoutX="5.0" layoutY="5.0" text="9.2 Какими иными языками вы владеете?" />
+                                          <CheckBox fx:id="signLanguageCheckBox" layoutX="290.0" layoutY="50.0" mnemonicParsing="false" text="Язык&#10;жестов" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="motherTongueTextField" layoutX="10.0" layoutY="20.0" />
+                                          <Label layoutX="5.0" layoutY="5.0" text="9.3 Ваш родной язык" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Часть Б">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3211963589076723, 0.41482444733420026, 0.6176853055916776, 0.7997399219765929" orientation="VERTICAL" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="376.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TextField fx:id="otherSourceTextField" disable="true" layoutX="180.0" layoutY="210.0" />
+                                          <Label layoutX="5.0" layoutY="5.0" text="10. Источники средств к существованию" />
+                                          <Label layoutX="5.0" layoutY="20.0" text="10.1 Укажите все имеющиеся у Вас источники средств к &#10;существованию" />
+                                          <Label layoutX="5.0" layoutY="35.0" text="Число ответов неограничено" />
+                                          <Label fx:id="fifteenthLabel" disable="true" layoutX="300.0" layoutY="190.0" text="Запишите какой" />
+                                          <CheckBox fx:id="workCheckBox" layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Трудовая деятельность,&#10;включая работу по&#10;совместительству" />
+                                          <CheckBox fx:id="farmCheckBox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Личное подсобное&#10;хозяйство" />
+                                          <CheckBox fx:id="feeCheckBox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Стипендия" />
+                                          <CheckBox fx:id="pensionCheckBox" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Пенсия (кроме пенсии&#10;по инвалидности)" />
+                                          <CheckBox fx:id="disabilityCheckBox" layoutX="10.0" layoutY="180.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Пенсия по инвалидности" />
+                                          <CheckBox fx:id="gratuityCheckBox" layoutX="10.0" layoutY="200.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Пособие (кроме пособия по&#10;безработице" />
+                                          <CheckBox fx:id="benefitCheckBox" layoutX="180.0" layoutY="50.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Пособие по безработице" />
+                                          <CheckBox fx:id="anotherCheckBox" layoutX="180.0" layoutY="60.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Другой вид государственного &#10;обеспечения" />
+                                          <CheckBox fx:id="savingsCheckBox" layoutX="180.0" layoutY="90.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Сбережения, диведенты,&#10;проценты" />
+                                          <CheckBox fx:id="leaseCheckBox" layoutX="180.0" layoutY="120.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Сдача внаем или в аренду&#10;имущества, доход от&#10;петнтов, авторских прав" />
+                                          <CheckBox fx:id="alimonyCheckBox" layoutX="180.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkBoxCheck" text="Иждевение, помощь &#10;других лиц, алименты" />
+                                          <CheckBox fx:id="otherSourceCheckBox" layoutX="180.0" layoutY="190.0" mnemonicParsing="false" onAction="#otherSourceCheckBoxOnClick" text="Иной источник" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="0.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="thirteenthLabel" disable="true" layoutX="5.0" layoutY="5.0" text="10.2 Если вы имеете несколько источников,&#10;укажите, какой считаете для себя основным" />
+                                          <Label fx:id="fourteenthLabel" disable="true" layoutX="5.0" layoutY="40.0" text="Запишите номер этого источника из вопроса 10.1" />
+                                          <TextField fx:id="manySourcesTextField" disable="true" layoutX="300.0" layoutY="30.0" prefWidth="40.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="thirtiethLabel" disable="true" layoutX="5.0" layoutY="5.0" text="Вопросы 11.1 - 11.5 для лиц в возрасте 15-72 лет&#10;Для остальных - переход к вопросу 12.1" />
+                                          <Label fx:id="thirtyFirstLabel" disable="true" layoutX="5.0" layoutY="40.0" text="11. Занятость и безработица" />
+                                          <Label fx:id="thirtySecondLabel" disable="true" layoutX="5.0" layoutY="60.0" text="11.1 Имели ли Вы какую-лио работу, приносящую&#10;зароботок или доход с 7 по 13 октября 2010 года?" />
+                                          <ComboBox fx:id="workComboBox" disable="true" layoutX="30.0" layoutY="91.0" onAction="#workComboBoxOnClick" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="thirtyThirdLabel" disable="true" layoutX="5.0" layoutY="5.0" text="11.2 Кем Вы являлись на основной работе?" />
+                                          <ComboBox fx:id="positionComboBox" disable="true" layoutX="124.0" layoutY="33.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="369.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="thirtyFourthLabel" disable="true" layoutX="5.0" layoutY="5.0" text="11.3 Ваша работа находилась на территории того же&#10;населенного пункта, где вы проживали?" />
+                                          <Label fx:id="sixteenthLabel" disable="true" layoutX="60.0" layoutY="40.0" text="На территории Вашего субъекта Российской&#10;Федерации?" />
+                                          <Label fx:id="seventeenthLabel" disable="true" layoutX="140.0" layoutY="60.0" text="Укажите наименование субъекта&#10;Российской Федерации (республика, край,&#10;область, фвт. область, авт. округ, г. Москва,&#10;г. Санкт-Петербург) или наименование&#10;иностранного государства, где вы работали&#10;" />
+                                          <TextField fx:id="whereYouWorkedTextField" disable="true" layoutX="10.0" layoutY="120.0" prefWidth="100.0" />
+                                          <ComboBox fx:id="yourSubjectComboBox" disable="true" layoutX="-15.0" layoutY="39.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="inCountryComboBox" disable="true" layoutX="10.0" layoutY="74.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane dividerPositions="0.05721716514954486, 0.31469440832249673, 0.5006501950585176, 0.6671001300390117, 0.8335500650195059" orientation="VERTICAL" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="thirtyFifthLabel" disable="true" layoutX="5.0" layoutY="5.0" text="11.4 Имели ли Вы в этот период вторую работу?" />
+                                          <ComboBox fx:id="secondWorkComboBox" disable="true" layoutX="198.0" layoutY="14.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="0.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="thirtySixthLabel" disable="true" layoutX="5.0" layoutY="15.0" text="11.5 Искали ли Вы работу в течение последнего месяца?" />
+                                          <Label fx:id="nineteenthLabel" disable="true" layoutX="200.0" layoutY="30.0" text="Укажите одну главную причину:" />
+                                          <Label fx:id="eighteenthLabel" disable="true" layoutX="10.0" layoutY="50.0" text="Если бы Вам предложили&#10;подходящую работу, то&#10;смогли бы Вы приступить&#10;к ней в ближайшие 2 &#10;недели?" />
+                                          <Label fx:id="twentiethLabel" disable="true" layoutX="200.0" layoutY="127.0" text="Запишите какая" />
+                                          <TextField fx:id="reasonTextField" disable="true" layoutX="201.0" layoutY="148.0" />
+                                          <ComboBox fx:id="areYouReadyComboBox" disable="true" layoutX="6.0" layoutY="135.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="whyNotLookingComboBox" disable="true" layoutX="200.0" layoutY="57.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="haveYouLookedComboBox" disable="true" layoutX="22.0" layoutY="26.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="5.0" text="12. Миграция" />
+                                          <Label layoutX="5.0" layoutY="15.0" text="12.1 С какого года Вы непрерывно проживаете в этом&#10;населенном пункте?" />
+                                          <TextField fx:id="yearOfArrivalTextField" disable="true" layoutX="10.0" layoutY="111.0" prefWidth="100.0" />
+                                          <Label fx:id="errorLabel1" layoutX="40.0" layoutY="115.0" text="Значение не соответствует формату года." textFill="RED" visible="false" />
+                                          <Label fx:id="twentyFirstLabel" disable="true" layoutX="25.0" layoutY="93.0" text="Иное" />
+                                          <ComboBox fx:id="migrationComboBox" layoutX="5.0" layoutY="49.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="twentySecondLabel" disable="true" layoutY="6.0" text="12.2 Где вы проживали в октябре 2009 года" />
+                                          <Label fx:id="twentyThirdLabel" disable="true" layoutX="3.0" layoutY="23.0" text="Укажите наименование субъекта Российской федерации или&#10;наименование иностранного государства&#9;" />
+                                          <Label fx:id="twentyFourthLabel" disable="true" layoutX="14.0" layoutY="82.0" text="В каком населенном пункте Вы проживали?" />
+                                          <TextField fx:id="subjectBeforeTextField" disable="true" layoutX="14.0" layoutY="57.0" />
+                                          <ComboBox fx:id="typeOfLocalityComboBox" disable="true" layoutX="13.0" layoutY="96.0" prefWidth="150.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="twentyFifthLabel" disable="true" layoutX="5.0" layoutY="5.0" text="13. Для женщин в возрасте 15 лет и более" />
+                                          <Label fx:id="twentySixthLabel" disable="true" layoutX="5.0" layoutY="22.0" text="13.1 Записать общее число рожденных &#10;детей, не считая мертворожденных&#10;" />
+                                          <TextField fx:id="childrenTextField" layoutX="235.0" layoutY="27.0" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane prefHeight="369.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="twentySeventhLabel" disable="true" layoutX="5.0" layoutY="5.0" text="13.2 Дата рождения первого ребенка" />
+                                          <TextField fx:id="childYearTextField" disable="true" layoutX="171.0" layoutY="25.0" />
+                                          <TextField fx:id="childMonthTextField" disable="true" layoutX="14.0" layoutY="25.0" />
+                                          <Label fx:id="twentyEighthLabel" disable="true" layoutX="70.0" layoutY="54.0" text="Месяц" />
+                                          <Label fx:id="twentyNinethLabel" disable="true" layoutX="212.0" layoutY="63.0" text="Год" />
+                                          <Label fx:id="errorLabel2" layoutX="18.0" layoutY="80.0" text="Неверный формат даты. Проверьте введенные данные" textFill="RED" visible="false" />
+                                          <Button fx:id="submitButton" layoutX="319.0" layoutY="75.0" mnemonicParsing="false" onAction="#submitButtonOnClick" prefWidth="70.0" text="ОК" />
+                                          <Button fx:id="cancelButton" layoutX="248.0" layoutY="75.0" mnemonicParsing="false" onAction="#cancelButtonOnClick" text="Отмена" />
+                                          <Label fx:id="errorLabel3" layoutX="8.0" layoutY="80.0" text="Вы ответили не на все впросы." textFill="RED" visible="false" />
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="350.0" layoutY="5.0" text="Опросный лист формы Л" />
+   </children>
+</AnchorPane>

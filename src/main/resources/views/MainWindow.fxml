@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainWindowController">
+   <children>
+      <MenuBar layoutY="-3.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+            <Menu mnemonicParsing="false" text="Информация о пользователе">
+              <items>
+                <MenuItem fx:id="lastnameMenu" mnemonicParsing="false" text="Фамилия" />
+                  <MenuItem fx:id="nameMenu" mnemonicParsing="false" text="Имя" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Действия">
+              <items>
+                <MenuItem fx:id="changeUserMenu" mnemonicParsing="false" onAction="#changeUserMenuClick" text="Сменить пользователя" />
+                  <MenuItem fx:id="exitMenu" mnemonicParsing="false" onAction="#exitMenuClick" text="Выход" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.7555110220440882" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <items>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                  <Tab text="Здания">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="buildingTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="homeType" prefWidth="75.0" text="Тип жилища" />
+                                  <TableColumn fx:id="dateFound" prefWidth="75.0" text="Дата постройки" />
+                                    <TableColumn fx:id="wallMaterial" prefWidth="75.0" text="Материал стен" />
+                                    <TableColumn fx:id="energy" prefWidth="75.0" text="Электричество" />
+                                    <TableColumn fx:id="stove" prefWidth="75.0" text="Электроплита" />
+                                    <TableColumn fx:id="gas" prefWidth="75.0" text="Газ" />
+                                    <TableColumn fx:id="heat" prefWidth="75.0" text="Отопление" />
+                                    <TableColumn fx:id="water" prefWidth="75.0" text="Вода" />
+                                    <TableColumn fx:id="hotWater" prefWidth="75.0" text="Горячая вода" />
+                                    <TableColumn fx:id="canalisation" prefWidth="75.0" text="Канализация" />
+                                    <TableColumn fx:id="shower" prefWidth="75.0" text="Душ" />
+                                    <TableColumn fx:id="closet" prefWidth="75.0" text="Туалет" />
+                                    <TableColumn fx:id="garbage" prefWidth="75.0" text="Мусор" />
+                                    <TableColumn fx:id="kitchen" prefWidth="75.0" text="Кухня" />
+                                </columns>
+                              </TableView>
+                              <TableView fx:id="flatTableView" prefHeight="200.0" prefWidth="432.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="flatType" prefWidth="75.0" text="Тип квартиры" />
+                                  <TableColumn fx:id="flatSquare" prefWidth="68.0" text="Площадь" />
+                                    <TableColumn fx:id="flatChamberCount" prefWidth="75.0" text="Кол-во комнат" />
+                                    <TableColumn fx:id="flatPhone" prefWidth="75.0" text="Телефон" />
+                                    <TableColumn fx:id="flatTv" prefWidth="75.0" text="Телевизор" />
+                                    <TableColumn fx:id="flatRadio" prefWidth="75.0" text="Радио" />
+                                </columns>
+                              </TableView>
+                              <TableView fx:id="householdTableView" prefHeight="200.0" prefWidth="330.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.rightAnchor="-2.0">
+                                <columns>
+                                  <TableColumn fx:id="peopleCount" prefWidth="75.0" text="Кол-во человек" />
+                                    <TableColumn fx:id="chamberCount" prefWidth="75.0" text="Кол-во занимаемых комнат" />
+                                    <TableColumn fx:id="internet" prefWidth="75.0" text="Наличие интернета" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                <Tab text="Люди">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="humanTableView" prefHeight="944.0" prefWidth="762.0" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                    <TableColumn fx:id="humanWhoIs" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Кем является" />
+                                  <TableColumn fx:id="humanSex" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Пол" />
+                                  <TableColumn fx:id="humanBirthDate" prefWidth="75.0" text="Дата рождения" />
+                                    <TableColumn fx:id="humanBirthPlace" prefWidth="75.0" text="Место рождения" />
+                                    <TableColumn fx:id="humanMarriage" prefWidth="75.0" text="Брак" />
+                                    <TableColumn fx:id="humanCitizenship" prefWidth="75.0" text="Гражданство" />
+                                    <TableColumn fx:id="humanNationality" prefWidth="75.0" text="Национальность" />
+                                    <TableColumn fx:id="humanEducation" prefWidth="75.0" text="Образование" />
+                                    <TableColumn fx:id="humanReadnWrite" prefWidth="75.0" text="Умеете читать и писать?" />
+                                    <TableColumn fx:id="humanScienceGrade" prefWidth="75.0" text="Научная степень" />
+                                    <TableColumn fx:id="humanDoYouStudy" prefWidth="75.0" text="Учитесь ли вы?" />
+                                    <TableColumn fx:id="humanPrimarySchool" prefWidth="75.0" text="Посещаете дошкольное учреждение?" />
+                                    <TableColumn fx:id="humanRussian" prefWidth="75.0" text="Владеете русским языком?" />
+                                    <TableColumn fx:id="humanOtherLang" prefWidth="75.0" text="Другие языки" />
+                                    <TableColumn fx:id="humanMotherTongue" prefWidth="75.0" text="Родной язык" />
+                                    <TableColumn fx:id="humanSalarySources" prefWidth="75.0" text="Источники доходов" />
+                                    <TableColumn fx:id="humanMainSource" prefWidth="75.0" text="Основной источник" />
+                                    <TableColumn fx:id="humanOctoberSalary" prefWidth="75.0" text="Имели работу в октябре?" />
+                                    <TableColumn fx:id="humanPosition" prefWidth="75.0" text="Должность" />
+                                    <TableColumn fx:id="humanWorkNear" prefWidth="75.0" text="Работа рядом" />
+                                    <TableColumn fx:id="humanWorkInRf" prefWidth="75.0" text="Работа в РФ" />
+                                    <TableColumn fx:id="humanWorkNotRf" prefWidth="75.0" text="Работа не в РФ?" />
+                                    <TableColumn fx:id="humanSecondJob" prefWidth="75.0" text="Имеете вторую работу?" />
+                                    <TableColumn fx:id="humanNear2Weeks" prefWidth="75.0" text="Искали работу последние 2 недели?" />
+                                    <TableColumn fx:id="humanLookingForJob" prefWidth="75.0" text="Приступили бы, если бы предложили?" />
+                                    <TableColumn fx:id="humanWhyNotLooking" prefWidth="75.0" text="Почему не искали?" />
+                                    <TableColumn fx:id="humanLiveSinceBirth" prefWidth="75.0" text="Живете здесь с рождения?" />
+                                    <TableColumn fx:id="humanYearWhereLive" prefWidth="75.0" text="Год переезда" />
+                                    <TableColumn fx:id="humanPlaceWhereLive" prefWidth="75.0" text="Где жили ранее" />
+                                    <TableColumn fx:id="humanTypePlace" prefWidth="75.0" text="Тип места жительства?????" />
+                                    <TableColumn fx:id="humanChildCount" prefWidth="75.0" text="Кол-во рожденных детей" />
+                                    <TableColumn fx:id="humanFirstChildBirthdate" prefWidth="75.0" text="Дата рождения первенца" />
+                                </columns>
+                              </TableView>
+                              <TableView fx:id="migrationTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="500.0">
+                                <columns>
+                                  <TableColumn fx:id="migrationSex" prefWidth="75.0" text="Пол" />
+                                  <TableColumn fx:id="migrationYear" prefWidth="75.0" text="Год рождения" />
+                                    <TableColumn fx:id="migrationCountry" prefWidth="75.0" text="Страна проживания" />
+                                    <TableColumn fx:id="migrationTarget" prefWidth="75.0" text="Цель" />
+                                    <TableColumn fx:id="migrationLasting" prefWidth="75.0" text="Продолжительность" />
+                                    <TableColumn fx:id="migrationMotherCountry" prefWidth="75.0" text="Страна рождения" />
+                                    <TableColumn fx:id="migrationCitizenship" prefWidth="149.0" text="Гражданство" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <Pane>
+               <children>
+                  <Button fx:id="newMigratorButton" layoutX="13.0" layoutY="356.0" mnemonicParsing="false" onAction="#newMigratorButtonClick" text="Добавить мигранта" />
+                  <Button fx:id="newBuildingButton" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" onAction="#newBuildingButtonClick" text="Добавить здание" />
+                  <Button fx:id="newFlatButton" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#newFlatButtonClick" text="Добавить квартиру" />
+                  <Button fx:id="newHouseholdButton" layoutX="17.0" layoutY="247.0" mnemonicParsing="false" onAction="#newHouseholdButtonClick" text="Добавить домохозяйство" />
+                  <CheckBox fx:id="masterDetailCheckBox" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" onAction="#masterDetailCheckBoxClick" text="Режим Master-Detail" />
+                  <Button fx:id="renewButton" layoutX="37.0" layoutY="59.0" mnemonicParsing="false" onAction="#renewButtonClick" text="Обновить" />
+                  <Button fx:id="newPersonButton" layoutX="22.0" layoutY="300.0" mnemonicParsing="false" onAction="#newHumanButtonClick" text="Добавить человека" />
+               </children>
+            </Pane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

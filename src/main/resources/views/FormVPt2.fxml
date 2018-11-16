@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FormVPt2Controller">
+   <children>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="800.0">
+         <children>
+            <Label layoutX="5.0" layoutY="5.0" text="Раздел II - заполняется на каждую квартиру или одноквартирный дом">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+            <SplitPane dividerPositions="0.10270270270270271, 0.5783783783783784, 0.8351351351351352" layoutX="20.0" layoutY="53.0" orientation="VERTICAL" prefHeight="372.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="30.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Pane prefHeight="0.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="eighteenthLabel" layoutX="5.0" layoutY="7.0" text="1. Тип жилого помещения:" />
+                              <ComboBox fx:id="homeTypeComboBox" layoutX="206.0" layoutY="2.0" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Pane prefHeight="0.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="nineteenthLabel" layoutX="5.0" layoutY="5.0" text="2. Размер общей площади квартиры&#10;или одноквартирного дома &#10;(в целых кв.м):&#10;" />
+                              <Label fx:id="twentiethLabel" layoutX="270.0" layoutY="5.0" text="В общую площадь жилого помещения не включается площадь:&#10;- общедомовых лестничных клеток, лифтовых холлов, тамбуров, коридоров&#10;(кроме внутриквартирных), вестибюлей, сеней;&#10;- занятая выступающими конструктивными элементами и отопительными&#10;печами;&#10;- веранд, балконов, лоджий, террас;&#10;- гаражей;&#10;- отдельно стоящих кухонь, бань, бассейнов, саун, сараев, беседок и др.">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="squareTextField" layoutX="15.0" layoutY="75.0" prefWidth="50.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="twentyFirstLabel" layoutX="5.0" layoutY="5.0" text="3. Число жилых комнат квартиры&#10;или одноквартирного дома:" />
+                              <Label fx:id="twentySecondLabel" layoutX="270.0" layoutY="11.0" text="В число жилых комнат не включаются: кухни, холлы, коридоры, ванные и&#10;душевые комнаты, бассейны, сауны, кладовые и другие вспомогательные&#10;помещения. Совмещенная кухня-столовая считается жилой комнатой.">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="chamberNumberTextField" layoutX="15.0" layoutY="47.0" prefWidth="50.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="twentyThirdLabel" layoutX="5.0" layoutY="5.0" text="4. Наличие телекоммуникаций:" />
+                              <CheckBox fx:id="phoneCheckBox" layoutX="275.0" layoutY="5.0" mnemonicParsing="false" text="стационарная&#10;телефонная связь" />
+                              <CheckBox fx:id="tvCheckBox" layoutX="470.0" layoutY="5.0" mnemonicParsing="false" text="телевизионная &#10;антенна" />
+                              <CheckBox fx:id="radioCheckBox" layoutX="625.0" layoutY="5.0" mnemonicParsing="false" text="проводное радио&#10;(радиоточка)" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <Button fx:id="cancelButton" layoutX="322.0" layoutY="411.0" mnemonicParsing="false" onAction="#cancelButtonClick" text="Отмена" />
+            <Button fx:id="submitButton" layoutX="405.0" layoutY="411.0" mnemonicParsing="false" onAction="#submitButtonClick" prefWidth="73.0" text="ОК" />
+            <Label fx:id="errorLabel" layoutX="500.0" layoutY="415.0" text="Проверьте веденные данные" textFill="RED" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" onKeyReleased="#enterKeyPressed" prefHeight="235.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.RegistrationFormController">
+   <children>
+      <TextField fx:id="lastnameTextField" layoutX="10.0" layoutY="27.0" prefWidth="150.0" />
+      <TextField fx:id="nameTextField" layoutX="183.0" layoutY="27.0" prefWidth="150.0" />
+      <TextField fx:id="patronimicTextField" layoutX="358.0" layoutY="27.0" prefWidth="150.0" />
+      <TextField fx:id="serialTextField" layoutX="10.0" layoutY="87.0" prefWidth="150.0" />
+      <TextField fx:id="passportTextField" layoutX="183.0" layoutY="87.0" prefWidth="150.0" />
+      <TextField fx:id="codeTextField" layoutX="358.0" layoutY="87.0" prefWidth="150.0" />
+      <TextField fx:id="emailTextField" layoutX="10.0" layoutY="150.0" prefWidth="150.0" />
+      <PasswordField fx:id="passwordTextField" layoutX="183.0" layoutY="150.0" prefWidth="150.0" />
+      <PasswordField fx:id="repeatPasswordTextField" layoutX="358.0" layoutY="150.0" prefWidth="150.0" />
+      <Button fx:id="submitButton" layoutX="184.0" layoutY="193.0" mnemonicParsing="false" onAction="#submitButtonClick" prefWidth="73.0" text="ОК" />
+      <Button fx:id="cancelButton" layoutX="267.0" layoutY="193.0" mnemonicParsing="false" onAction="#cancelButtonClick" text="Отмена" />
+      <Label layoutX="20.0" layoutY="5.0" text="Фамилия" />
+      <Label layoutX="190.0" layoutY="5.0" text="Имя" />
+      <Label layoutX="365.0" layoutY="5.0" text="Отчество" />
+      <Label layoutX="20.0" layoutY="63.0" text="Номер паспорта" />
+      <Label layoutX="190.0" layoutY="63.0" text="Серия" />
+      <Label layoutX="365.0" layoutY="63.0" text="Код подразделения" />
+      <Label layoutX="20.0" layoutY="124.0" text="E-mail" />
+      <Label layoutX="190.0" layoutY="124.0" text="Пароль" />
+      <Label layoutX="365.0" layoutY="124.0" text="Повторите пароль" />
+      <Label fx:id="label" layoutX="150.0" layoutY="200.0" text="Проверьте введенные данные." textFill="RED" visible="false" />
+   </children>
+</AnchorPane>

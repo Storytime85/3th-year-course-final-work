@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="480.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FormVController">
+   <children>
+  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <SplitPane dividerPositions="0.12526997840172785, 0.3326133909287257, 0.48812095032397407" layoutX="53.0" layoutY="-7.0" orientation="VERTICAL" prefHeight="751.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Pane prefHeight="376.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="5.0" layoutY="5.0" text="1. Тип жилища:" />
+                              <Label fx:id="secondLabel" disable="true" layoutX="280.0" layoutY="5.0" text="Укажите какое:" />
+                              <Label fx:id="firstLabel" disable="true" layoutX="567.0" layoutY="5.0" text="Конец опроса&#10;по форме П" />
+                              <TextField fx:id="otherTypeTextField" disable="true" layoutX="395.0" layoutY="5.0" prefWidth="150.0" />
+                              <ComboBox fx:id="buildingTypeComboBox" layoutX="120.0" layoutY="5.0" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Pane prefHeight="0.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="thirdLabel" disable="true" layoutX="5.0" layoutY="5.0" text="2. Время постройки дома:" />
+                              <Label fx:id="fourthLabel" disable="true" layoutX="360.0" layoutY="5.0" text="При перестройках, надстройках, &#10;расширении дома годом ввода в&#10;эксплуатацию считается год&#10;первоначальной постройки">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font></Label>
+                              <ComboBox fx:id="foundationTimeComboBox" disable="true" layoutX="190.0" layoutY="5.0" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="105.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="fifthLabel" disable="true" layoutX="5.0" layoutY="5.0" text="3. Материал наружных&#10;стен дома:" />
+                              <Label fx:id="sixthLabel" disable="true" layoutX="360.0" layoutY="5.0" text="Запишите, из какого&#10;материала стены:" />
+                              <TextField fx:id="otherMaterialsFieldText" disable="true" layoutX="520.0" layoutY="11.0" prefWidth="100.0" />
+                              <ComboBox fx:id="wallsMaterialComboBox" disable="true" layoutX="190.0" layoutY="5.0" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="-66.0" layoutY="54.0" prefHeight="386.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="sixteenthLabel" disable="true" layoutX="175.0" layoutY="176.0" text="Кухня:" />
+                              <Label fx:id="ninthLabel" disable="true" layoutX="5.0" layoutY="148.0" text="Отопление:" />
+                              <Label fx:id="eleventhLabel" disable="true" layoutX="147.0" layoutY="82.0" text="Горячее водо-&#10;снабжение:" />
+                              <Label fx:id="twelfthLabel" disable="true" layoutX="289.0" layoutY="82.0" text="Воотведение &#10;(канализация):" />
+                              <Label fx:id="eighthLabel" disable="true" layoutX="5.0" layoutY="95.0" text="Газ:" />
+                              <Label fx:id="thirteenthLabel" disable="true" layoutX="285.0" layoutY="30.0" text="Туалет:" />
+                              <Label fx:id="seventhLabel" disable="true" layoutX="5.0" layoutY="5.0" text="4. Виды благоустройства жилого помещения и санитарно-гигиенические условия проживания:" />
+                              <Label fx:id="tenthLabel" disable="true" layoutX="147.0" layoutY="30.0" text="Водоснабжение:" />
+                              <Label fx:id="fourteenthLabel" disable="true" layoutX="425.0" layoutY="30.0" text="Ванна и (или) душ:" />
+                              <Label fx:id="fifteenthLabel" disable="true" layoutX="426.0" layoutY="85.0" text="Удаление бы-&#10;товых отходов:" />
+                              <CheckBox fx:id="electricStoveCheckBox" disable="true" layoutX="5.0" layoutY="58.0" mnemonicParsing="false" text="Электроплита &#10;напольная" />
+                              <CheckBox fx:id="electricityCheckBox" disable="true" layoutX="5.0" layoutY="32.0" mnemonicParsing="false" text="Электричество" />
+                              <ComboBox fx:id="gasComboBox" disable="true" layoutX="5.0" layoutY="115.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="heatComboBox" disable="true" layoutX="5.0" layoutY="171.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="waterComboBox" disable="true" layoutX="147.0" layoutY="52.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="hotWaterComboBox" disable="true" layoutX="147.0" layoutY="131.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="canalisationComboBox" disable="true" layoutX="285.0" layoutY="131.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="toiletComboBox" disable="true" layoutX="285.0" layoutY="52.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="bathComboBox" disable="true" layoutX="425.0" layoutY="52.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="garbageComboBox" disable="true" layoutX="429.0" layoutY="131.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <ComboBox fx:id="kitchenComboBox" disable="true" layoutX="234.0" layoutY="171.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                              <Label fx:id="errorLabel" layoutX="375.0" layoutY="202.0" text="Проверьте введенные данные" textFill="RED" visible="false" />
+                              <Button fx:id="submitButton" layoutX="478.0" layoutY="171.0" mnemonicParsing="false" onAction="#submitButtonClick" prefWidth="73.0" text="ОК" />
+                              <Button fx:id="cancelButton" layoutX="398.0" layoutY="171.0" mnemonicParsing="false" onAction="#cancelButtonClick" prefWidth="73.0" text="Отмена" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <Label layoutX="8.0" layoutY="6.0" text="Раздел I - заполняется на жилище">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
