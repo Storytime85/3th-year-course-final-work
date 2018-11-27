@@ -46,6 +46,12 @@ public class MainWindowController extends FormControllers implements Initializab
 
     //region FXML
     @FXML
+    private ComboBox<String> tableSelectComboBox;
+    @FXML
+    private ComboBox<String> rowSelectComboBox;
+    @FXML
+    private TextField firstFilterTextField;
+    @FXML
     private Button renewButton;
     @FXML
     private CheckBox masterDetailCheckBox;
@@ -466,6 +472,30 @@ public class MainWindowController extends FormControllers implements Initializab
         tablesUpdate();
         masterDetailCheckBox.setSelected(false);
     }
+    @FXML
+    private void buildingTableOnSelect(){
+        if (masterDetailCheckBox.isSelected()){
+            flatTableView.setItems(getFlatIds(buildingTableView.getSelectionModel().getSelectedItem().getId()));
+        }
+    }
+    @FXML
+    private void flatTableOnSelect(){
+        if (masterDetailCheckBox.isSelected()){
+            householdTableView.setItems(getHouseholdsIds(flatTableView.getSelectionModel().getSelectedItem().getId()));
+        }
+    }
+    @FXML
+    private void householdTableOnSelect(){
+        if (masterDetailCheckBox.isSelected()){
+            humanTableView.setItems(getHumanIds(householdTableView.getSelectionModel().getSelectedItem().getId()));
+        }
+    }
+    @FXML
+    private void peopleTableOnSelect(){
+        if (masterDetailCheckBox.isSelected()){
+            migrationTableView.setItems(getMigrationIds(humanTableView.getSelectionModel().getSelectedItem().getId()));
+        }
+    }
     //endregion
 
     //region Updates
@@ -555,12 +585,9 @@ public class MainWindowController extends FormControllers implements Initializab
             e.printStackTrace();
         }
     }
-//TODO: допилить Mater-detail
-    private void buildingTableOnSelect(){
-        if (masterDetailCheckBox.isSelected()){
-            flatTableView.setItems(getFlatIds(buildingTableView.getSelectionModel().getSelectedItem().getId()));
-        }
-    }
+
+
+
     //region get....Ids для реализации master-detail
     private ObservableList<BuildingTableView> getBuildingIds(int index){
         List<dbBuildingtableEntity> temp = new ArrayList<>();

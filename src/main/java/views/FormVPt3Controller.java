@@ -5,12 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import persistence.Household;
 import persistence.abstracts.AddingControllers;
-import persistence.abstracts.FormControllers;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -67,22 +65,16 @@ public class FormVPt3Controller extends AddingControllers implements Initializab
         switch (temp) {
             case 2: {
                 minusOneButton.setDisable(true);
-                paneInScrollPane.getChildren().remove(householdControllers.get(temp - 1).getSplitPane());
-                householdControllers.remove(temp - 1);
-                paneInScrollPane.setPrefHeight(paneInScrollPane.getPrefWidth()-widthOfPane);
+                minusOne(temp);
                 break;
             }
             case 10: {
                 plusOneButton.setDisable(false);
-                paneInScrollPane.getChildren().remove(householdControllers.get(temp - 1).getSplitPane());
-                householdControllers.remove(temp - 1);
-                paneInScrollPane.setPrefHeight(paneInScrollPane.getPrefWidth()-widthOfPane);
+                minusOne(temp);
                 break;
             }
             default: {
-                paneInScrollPane.getChildren().remove(householdControllers.get(temp - 1).getSplitPane());
-                householdControllers.remove(temp - 1);
-                paneInScrollPane.setPrefHeight(paneInScrollPane.getPrefWidth()-widthOfPane);
+                minusOne(temp);
                 break;
             }
         }
@@ -137,5 +129,10 @@ public class FormVPt3Controller extends AddingControllers implements Initializab
         return result;
     }
 
+    private void minusOne(int temp){
+        paneInScrollPane.getChildren().remove(householdControllers.get(temp - 1).getSplitPane());
+        householdControllers.remove(temp - 1);
+        paneInScrollPane.setPrefHeight(paneInScrollPane.getPrefWidth()-widthOfPane);
+    }
 
 }

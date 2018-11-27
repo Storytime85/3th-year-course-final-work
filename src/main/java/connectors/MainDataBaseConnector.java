@@ -214,7 +214,7 @@ public class MainDataBaseConnector {
     }
     //endregion
 
-    //Todo: апдейты/сейвоапдейты
+    //Todo??: апдейты/сейвоапдейты
 
     public void saveOrUpdate(Object object) {
         session.beginTransaction();

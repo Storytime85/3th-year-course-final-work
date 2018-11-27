@@ -6,5 +6,4 @@ abstract public class AddingControllers extends FormControllers {
     public void setResultID(int id){
         resultId = id;
     }
-    //TODO: прихуярить передачу айдишников в формы
 }

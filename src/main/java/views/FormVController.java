@@ -276,12 +276,8 @@ public class FormVController extends AddingControllers implements Initializable 
         } else if (garbageComboBox.getSelectionModel().getSelectedIndex() ==-1 &&
                 !garbageComboBox.isDisabled()) {
             return false;
-        } else if (kitchenComboBox.getSelectionModel().getSelectedIndex() ==-1 &&
-                !kitchenComboBox.isDisabled()) {
-            return false;
-        } else {
-            return true;
-        }
+        } else return kitchenComboBox.getSelectionModel().getSelectedIndex() != -1 ||
+                kitchenComboBox.isDisabled();
     }
 
     private void updateErrorLabel(){

@@ -32,7 +32,6 @@ public class Login {
 
             connected.writeBoolean(isConnected);
             connected.flush();
-            //TODO: исправляй что нахуевертил
             if (isConnected){
                 UsersEntity person = connection.getPersonData();
                 output.writeObject(person);

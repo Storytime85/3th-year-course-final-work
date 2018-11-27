@@ -329,7 +329,6 @@ public class FormLController extends AddingControllers implements Initializable 
         if (!errorLabel3.isVisible()) {
             createHuman();
             if (human.getCitizenship() == 3 || human.getCitizenship() == 4) {
-                //TODO: Условие для открытия окна с миграцией
                 Stage stage = (Stage) submitButton.getScene().getWindow();
                 stage.close();
 
@@ -1083,11 +1082,7 @@ public class FormLController extends AddingControllers implements Initializable 
         } else if (!degreeComboBox.isDisable() &&
                 degreeComboBox.getSelectionModel().getSelectedIndex() == -1) {
             return false;
-        } else if (!kindergardenComboBox.isDisable() && sexComboBox.getSelectionModel().getSelectedIndex() == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        } else return kindergardenComboBox.isDisable() || sexComboBox.getSelectionModel().getSelectedIndex() != -1;
     }
 
     private boolean partBErrorCheck(){
@@ -1134,11 +1129,7 @@ public class FormLController extends AddingControllers implements Initializable 
         } else if (!typeOfLocalityComboBox.isDisable() &&
                 typeOfLocalityComboBox.getSelectionModel().getSelectedIndex() == -1){
             return false;
-        } else if (migrationComboBox.getSelectionModel().getSelectedIndex() == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        } else return migrationComboBox.getSelectionModel().getSelectedIndex() != -1;
     }
     //endregion
 

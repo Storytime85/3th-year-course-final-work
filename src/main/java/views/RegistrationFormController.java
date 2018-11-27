@@ -78,7 +78,7 @@ public class RegistrationFormController extends FormControllers implements Initi
         try {
             stage.close();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setScene(new Scene(root1));
             stage1.show();
@@ -171,10 +171,6 @@ public class RegistrationFormController extends FormControllers implements Initi
             return false;
         } else if (!passwordTextField.getText().equals(repeatPasswordTextField.getText())){
             return false;
-        } else if (emailTextField.getText().isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        } else return !emailTextField.getText().isEmpty();
     }
 }

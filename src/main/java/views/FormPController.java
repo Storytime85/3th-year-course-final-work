@@ -210,11 +210,7 @@ public class FormPController extends AddingControllers implements Initializable 
             return false;
         } else if (motherlandTextField.getText().isEmpty() && !motherlandTextField.isDisabled()){
             return false;
-        } else if (citizenshipTextField.getText().isEmpty() && !citizenshipTextField.isDisabled()){
-            return false;
-        } else {
-            return true;
-        }
+        } else return !citizenshipTextField.getText().isEmpty() || citizenshipTextField.isDisabled();
     }
 
     private void setSecondColumnEnabled(boolean pose) {

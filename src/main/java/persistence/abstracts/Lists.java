@@ -221,4 +221,48 @@ public abstract class Lists extends Listeners {
                     "Коммунальная квартира"
             );
     //endregion
+
+    //region Filters
+    protected static final ObservableList<String> tablesOptions =
+            FXCollections.observableArrayList(
+                    "Здания",
+                    "Квартиры",
+                    "Домохозяйства",
+                    "Люди",
+                    "Мигранты"
+            );
+    protected static final ObservableList<String> buildingsOptions =
+            FXCollections.observableArrayList(
+                    "Тип жилища",
+                    "Материал стен"
+            );
+    protected static final ObservableList<String> flatsOptions =
+            FXCollections.observableArrayList(
+                    "Площадь",
+                    "Кол-во комнат"
+
+            );
+    protected static final ObservableList<String> householdsOptions =
+            FXCollections.observableArrayList(
+                    "Кол-во человек",
+                    "Кол-во комнат"
+            );
+    protected static final ObservableList<String> peopleOptions =
+            FXCollections.observableArrayList(
+                    "Дата рождения",
+                    "Местро рождения",
+                    "Гражданство",
+                    "Национальность",
+                    "Языки",
+                    "Родной язык",
+                    "Год переезда"
+            );
+    protected static final ObservableList<String> migratorsOptions =
+            FXCollections.observableArrayList(
+                    "Год рождения",
+                    "Страна проживания",
+                    "Страна рождения",
+                    "Цель"
+            );
+    //endregion
 }

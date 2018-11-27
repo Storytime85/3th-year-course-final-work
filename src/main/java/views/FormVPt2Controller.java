@@ -89,11 +89,7 @@ public class FormVPt2Controller extends AddingControllers implements Initializab
             return false;
         } else if (!squareTextField.isDisabled() && squareTextField.getText().isEmpty()) {
             return false;
-        } else if (!chamberNumberTextField.isDisabled() && chamberNumberTextField.getText().isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        } else return chamberNumberTextField.isDisabled() || !chamberNumberTextField.getText().isEmpty();
     }
 
     private void updateErrorLabel () {
