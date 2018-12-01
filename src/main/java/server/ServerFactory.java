@@ -16,7 +16,7 @@ public class ServerFactory {
         try {
             LoginDataBaseConnector ubConnection = new LoginDataBaseConnector();
             MainDataBaseConnector dbConnection = new MainDataBaseConnector();
-            String incomingCommand = "";
+            String incomingCommand;
             ServerSocket server = new ServerSocket(3345);
             while (!server.isClosed()) {
                 try {

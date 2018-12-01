@@ -27,6 +27,9 @@ import java.util.*;
 public class MainWindowController extends FormControllers implements Initializable {
     private UsersEntity user = new UsersEntity();
 
+    private int currentTable;
+    private int currentRow;
+
     //region Lists
     private List<dbBuildingtableEntity> buildings;
     private List<dbFlattableEntity> flats;
@@ -267,6 +270,7 @@ public class MainWindowController extends FormControllers implements Initializab
     @SuppressWarnings("unchecked")
     public void initialize(URL location, ResourceBundle resources) {
             createOrUpdateLists();
+            initializeComboBoxes();
 
             dataSetsUpdate();
 
@@ -379,6 +383,10 @@ public class MainWindowController extends FormControllers implements Initializab
             }
         });
     }
+
+    private void initializeComboBoxes(){
+        tableSelectComboBox.setItems(tablesOptions);
+    }
     //endregion
 
     //region FXML Methods
@@ -473,6 +481,76 @@ public class MainWindowController extends FormControllers implements Initializab
         masterDetailCheckBox.setSelected(false);
     }
     @FXML
+    private void tableSelectComboBoxOnSelect() throws IOException {
+        int index = tableSelectComboBox.getSelectionModel().getSelectedIndex();
+        switch (index){
+            case 0:{
+                rowSelectComboBox.setItems(buildingsOptions);
+                break;
+            }
+            case 1:{
+                rowSelectComboBox.setItems(flatsOptions);
+                break;
+            }
+            case 2:{
+                rowSelectComboBox.setItems(householdsOptions);
+                break;
+            }
+            case 3:{
+                rowSelectComboBox.setItems(peopleOptions);
+                break;
+            }
+            case 4:{
+                rowSelectComboBox.setItems(migratorsOptions);
+                break;
+            }
+            default : {
+                throw new IOException("Wrong selection");
+            }
+        }
+    }
+    @FXML
+    private void rowSelectComboBoxOnSelect(){
+        currentTable = tableSelectComboBox.getSelectionModel().getSelectedIndex();
+        currentRow = rowSelectComboBox.getSelectionModel().getSelectedIndex();
+
+    }
+    @FXML
+    private void firstFilterTextFieldOnAction() throws IOException{
+        switch (currentTable) {
+
+            case 0: {
+
+                break;
+            }
+            case 1: {
+                switch (currentRow) {
+                    case 0: {
+
+                        break;
+                    }
+                    case 1: {
+
+                        break;
+                    }
+                }
+                break;
+            }
+            case 2: {
+                break;
+            }
+            case 3: {
+                break;
+            }
+            case 4: {
+                break;
+            }
+            default: {
+                throw new IOException("Wrong selection");
+            }
+        }
+    }
+    /*@FXML
     private void buildingTableOnSelect(){
         if (masterDetailCheckBox.isSelected()){
             flatTableView.setItems(getFlatIds(buildingTableView.getSelectionModel().getSelectedItem().getId()));
@@ -495,7 +573,7 @@ public class MainWindowController extends FormControllers implements Initializab
         if (masterDetailCheckBox.isSelected()){
             migrationTableView.setItems(getMigrationIds(humanTableView.getSelectionModel().getSelectedItem().getId()));
         }
-    }
+    }*/
     //endregion
 
     //region Updates
