@@ -132,6 +132,7 @@ public class DataBase {
     //region get
     private void getAll(Socket client, MainDataBaseConnector connection) throws IOException{
         ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
+        connection.updateConnection();
 
         output.writeObject(connection.getBuildings());
         output.flush();
