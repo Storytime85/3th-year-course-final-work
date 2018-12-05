@@ -60,6 +60,8 @@ public class FormPController extends AddingControllers implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
+
         purposeComboBox.getItems().removeAll(purposeComboBox.getItems());
         purposeComboBox.getItems().addAll(purposeOptions);
         sexComboBox.getItems().removeAll(sexComboBox.getItems());

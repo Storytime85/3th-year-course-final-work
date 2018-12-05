@@ -3,6 +3,7 @@ package views;
 import entities.UsersEntity;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,14 +13,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import persistence.abstracts.FormControllers;
 
 import java.io.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController extends FormControllers implements Initializable {
     private UsersEntity newPerson;
     private boolean isConnected;
 
@@ -42,7 +46,7 @@ public class LoginController {
         errorLabel.setVisible(false);
         Stage stage = (Stage) submitButton.getScene().getWindow();
         try {
-            Socket socket = new Socket("localhost", 3345);
+            Socket socket = new Socket(host, port);
             DataOutputStream type = new DataOutputStream(socket.getOutputStream());
 
             type.writeUTF("login");
@@ -152,5 +156,10 @@ public class LoginController {
                 es.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
     }
 }

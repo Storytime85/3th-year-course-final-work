@@ -269,18 +269,19 @@ public class MainWindowController extends FormControllers implements Initializab
     @Override
     @SuppressWarnings("unchecked")
     public void initialize(URL location, ResourceBundle resources) {
-            createOrUpdateLists();
-            initializeComboBoxes();
+        readHostAndPort();
+        createOrUpdateLists();
+        initializeComboBoxes();
 
-            dataSetsUpdate();
+        dataSetsUpdate();
 
-            initializeMigrationTable();
-            initializeHouseholdTable();
-            initializeFlatTable();
-            initializeBuildingTable();
-            initializeHumanTable();
+        initializeMigrationTable();
+        initializeHouseholdTable();
+        initializeFlatTable();
+        initializeBuildingTable();
+        initializeHumanTable();
 
-            tablesUpdate();
+        tablesUpdate();
     }
 
     private void initializeMigrationTable() {
@@ -580,7 +581,7 @@ public class MainWindowController extends FormControllers implements Initializab
     @SuppressWarnings("unchecked")
     private void createOrUpdateLists(){
         try {
-            Socket socket = new Socket("localhost", 3345);
+            Socket socket = new Socket(host, port);
 
             DataOutputStream type = new DataOutputStream(socket.getOutputStream());
 

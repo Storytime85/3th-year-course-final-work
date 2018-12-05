@@ -115,6 +115,8 @@ public class FormVPt3Controller extends AddingControllers implements Initializab
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
+
         householdControllers.add(new Household(paneInScrollPane, 0));
     }
 

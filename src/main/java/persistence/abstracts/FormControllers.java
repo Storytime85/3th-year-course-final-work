@@ -5,13 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 
 public abstract class FormControllers extends Lists {
+    protected String host;
+    protected int port;
 
     protected boolean getBool(ComboBox<String> box){
         return box.getSelectionModel().getSelectedIndex() == 0;
@@ -33,7 +33,7 @@ public abstract class FormControllers extends Lists {
 
     protected boolean addRegularObject(String command, Object object){
         try {
-            Socket socket = new Socket("localhost", 3345);
+            Socket socket = new Socket(host, port);
             DataOutputStream type = new DataOutputStream(socket.getOutputStream());
 
             type.writeUTF("database");
@@ -72,6 +72,36 @@ public abstract class FormControllers extends Lists {
             alert.setTitle("Ошибка");
             alert.setHeaderText("Непредвиденная ошибка. Повторите позже");
             alert.showAndWait();
+        }
+    }
+
+    protected void readHostAndPort(){
+        try{
+            String filePath = new File("").getAbsolutePath();
+            FileInputStream fStream = new FileInputStream(filePath.concat("/src/main/resources/config.cfg"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(fStream));
+
+            String strLine;
+
+            while ((strLine = br.readLine()) != null){
+                String[] line = strLine.split(":", 2);
+                switch (line[0]){
+                    case ("host") : {
+                        host = line[1];
+                        break;
+                    }
+                    case ("port"):{
+                        String temp = line[1];
+                        port = Integer.parseInt(line[1]);
+                        break;
+                    }
+                    default :{
+                        throw new IOException("Конфиг проверь.");
+                    }
+                }
+            }
+        }catch (IOException e){
+            System.out.println("Ошибка");
         }
     }
 }

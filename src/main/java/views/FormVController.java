@@ -108,6 +108,8 @@ public class FormVController extends AddingControllers implements Initializable 
     //region Initializers
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
+
         initializeComboBoxes();
         addListenersToComboBoxes();
     }

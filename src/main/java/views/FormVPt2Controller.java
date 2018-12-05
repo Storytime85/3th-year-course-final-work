@@ -67,6 +67,7 @@ public class FormVPt2Controller extends AddingControllers implements Initializab
     //region Initializers
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
         initializeComboBoxes();
         addListenersToTextFields();
     }

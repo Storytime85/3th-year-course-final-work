@@ -60,6 +60,8 @@ public class RegistrationFormController extends FormControllers implements Initi
     //region Initializers
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
+
         initializeTextFields();
     }
 
@@ -73,15 +75,8 @@ public class RegistrationFormController extends FormControllers implements Initi
     //region FXML Methods
     @FXML
     private void cancelButtonClick(){
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-
         try {
-            stage.close();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
-            Parent root1 = fxmlLoader.load();
-            Stage stage1 = new Stage();
-            stage1.setScene(new Scene(root1));
-            stage1.show();
+           newForm();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +93,7 @@ public class RegistrationFormController extends FormControllers implements Initi
         } else {
             boolean tempBoolean = false;
             setPerson();
-            try(Socket socket = new Socket("localhost", 3345)) {
+            try(Socket socket = new Socket(host,port)) {
                 DataOutputStream type = new DataOutputStream(socket.getOutputStream());
 
                 type.writeUTF("registration");
@@ -114,14 +109,8 @@ public class RegistrationFormController extends FormControllers implements Initi
                 e.printStackTrace();
             }
             if (tempBoolean){
-                Stage stage = (Stage) submitButton.getScene().getWindow();
                 try{
-                    stage.close();
-                    FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
-                    Parent root1 = fxmlloader.load();
-                    Stage stage1 = new Stage();
-                    stage1.setScene(new Scene(root1));
-                    stage1.show();
+                    newForm();
 
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -143,6 +132,15 @@ public class RegistrationFormController extends FormControllers implements Initi
     }
     //endregion
 
+    private void newForm() throws IOException{
+        Stage stage = (Stage) submitButton.getScene().getWindow();
+        stage.close();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
+        Parent root1 = fxmlloader.load();
+        Stage stage1 = new Stage();
+        stage1.setScene(new Scene(root1));
+        stage1.show();
+    }
     private void setPerson (){
         newUser = new UsersEntity();
         newUser.setUserName(nameTextField.getText());

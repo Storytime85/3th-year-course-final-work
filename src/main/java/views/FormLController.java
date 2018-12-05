@@ -369,6 +369,8 @@ public class FormLController extends AddingControllers implements Initializable 
     //region Initializers
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        readHostAndPort();
+
         initializeComboBoxes();
         addListenersToComboBoxes();
         addListenersToTextFields();
@@ -1150,7 +1152,7 @@ public class FormLController extends AddingControllers implements Initializable 
     private int addSalaries(){
         try {
             int salariesId;
-            Socket socket = new Socket("localhost", 3345);
+            Socket socket = new Socket(host, port);
 
             DataOutputStream type = new DataOutputStream(socket.getOutputStream());
 
