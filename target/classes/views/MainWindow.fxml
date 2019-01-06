@@ -59,7 +59,7 @@
                                     <TableColumn fx:id="kitchen" prefWidth="75.0" text="Кухня" />
                                 </columns>
                               </TableView>
-                              <TableView fx:id="flatTableView" prefHeight="374.0" prefWidth="432.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                              <TableView fx:id="flatTableView" prefHeight="381.0" prefWidth="432.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="319.0">
                                 <columns>
                                   <TableColumn fx:id="flatType" prefWidth="75.0" text="Тип квартиры" />
                                   <TableColumn fx:id="flatSquare" prefWidth="68.0" text="Площадь" />
@@ -69,7 +69,7 @@
                                     <TableColumn fx:id="flatRadio" prefWidth="75.0" text="Радио" />
                                 </columns>
                               </TableView>
-                              <TableView fx:id="householdTableView" prefHeight="381.0" prefWidth="320.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.rightAnchor="-2.0">
+                              <TableView fx:id="householdTableView" prefHeight="381.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="346.0">
                                 <columns>
                                   <TableColumn fx:id="peopleCount" prefWidth="124.0" text="Кол-во человек" />
                                     <TableColumn fx:id="chamberCount" prefWidth="67.0" text="Кол-во занимаемых комнат" />
@@ -148,7 +148,7 @@
                   <Button fx:id="newPersonButton" layoutX="13.0" layoutY="300.0" mnemonicParsing="false" onAction="#newHumanButtonClick" text="Добавить человека" />
                   <ComboBox fx:id="tableSelectComboBox" layoutX="6.0" layoutY="418.0" onAction="#tableSelectComboBoxOnSelect" prefWidth="150.0" />
                   <ComboBox fx:id="rowSelectComboBox" layoutY="462.0" onAction="#rowSelectComboBoxOnSelect" prefWidth="150.0" />
-                  <TextField fx:id="firstFilterTextField" layoutX="8.0" layoutY="503.0" prefWidth="120.0" />
+                  <TextField fx:id="firstFilterTextField" disable="true" layoutX="8.0" layoutY="503.0" prefWidth="120.0" />
                </children>
             </Pane>
         </items>

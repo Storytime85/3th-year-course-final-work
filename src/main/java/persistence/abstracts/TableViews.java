@@ -28,7 +28,11 @@ public abstract class TableViews extends Lists {
         if (index == null){
             return " ";
         } else if (index.equals(indexOfException)){
-            return string;
+            if ((string == null)){
+                return " ";
+            } else {
+                return string;
+            }
         } else {
             return list.get(index);
         }

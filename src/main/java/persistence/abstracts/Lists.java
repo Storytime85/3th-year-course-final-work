@@ -156,7 +156,7 @@ public abstract class Lists extends Listeners {
 
     protected static final ObservableList<String> heatOptions =
             FXCollections.observableArrayList(
-                    "Центарльное",
+                    "Центральное",
                     "От индивидуальных установок, котлов",
                     "Печное"
             );
@@ -250,7 +250,7 @@ public abstract class Lists extends Listeners {
     protected static final ObservableList<String> peopleOptions =
             FXCollections.observableArrayList(
                     "Дата рождения",
-                    "Местро рождения",
+                    "Место рождения",
                     "Гражданство",
                     "Национальность",
                     "Языки",

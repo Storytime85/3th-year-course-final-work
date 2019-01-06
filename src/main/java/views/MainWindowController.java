@@ -483,7 +483,11 @@ public class MainWindowController extends FormControllers implements Initializab
     }
     @FXML
     private void tableSelectComboBoxOnSelect() throws IOException {
+        tablesUpdate();
+        firstFilterTextField.setText("");
         int index = tableSelectComboBox.getSelectionModel().getSelectedIndex();
+        rowSelectComboBox.setItems(null);
+        firstFilterTextField.setDisable(true);
         switch (index){
             case 0:{
                 rowSelectComboBox.setItems(buildingsOptions);
@@ -509,72 +513,120 @@ public class MainWindowController extends FormControllers implements Initializab
                 throw new IOException("Wrong selection");
             }
         }
+
     }
     @FXML
     private void rowSelectComboBoxOnSelect(){
         currentTable = tableSelectComboBox.getSelectionModel().getSelectedIndex();
         currentRow = rowSelectComboBox.getSelectionModel().getSelectedIndex();
-
+        firstFilterTextFieldOnAction();
     }
     @FXML
-    private void firstFilterTextFieldOnAction() throws IOException{
-        switch (currentTable) {
-
-            case 0: {
-
-                break;
-            }
-            case 1: {
-                switch (currentRow) {
-                    case 0: {
-
-                        break;
+    private void firstFilterTextFieldOnAction(){
+        firstFilterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            switch (currentTable) {
+                case 0: {
+                    switch (currentRow) {
+                        case 0: {
+                            createBuildingTypeListener(newValue);
+                            break;
+                        }
+                        case 1: {
+                            createBuildingWallListener(newValue);
+                            break;
+                        }
                     }
-                    case 1: {
-
-                        break;
-                    }
+                    break;
                 }
-                break;
+                case 1: {
+                    switch (currentRow) {
+                        case 0: {
+                            createFlatSquareListener(newValue);
+                            break;
+                        }
+                        case 1: {
+                            createFlatChamberListener(newValue);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 2: {
+                    switch (currentRow) {
+                        case 0: {
+                            createHouseholdHumanListener(newValue);
+                            break;
+                        }
+                        case 1: {
+                            createHouseholdChamberListener(newValue);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 3: {
+                    switch (currentRow) {
+                        case 0: {
+                            createHumanDateListener(newValue);
+                            break;
+                        }
+                        case 1: {
+                            createHumanBirthplaceListener(newValue);
+                            break;
+                        }
+                        case 2: {
+                            createHumanCitizenshipListener(newValue);
+                            break;
+                        }
+                        case 3: {
+                            createHumanNationalityListener(newValue);
+                            break;
+                        }
+                        case 4: {
+                            createHumanMotherTongueListener(newValue);
+                            break;
+                        }
+                        case 5: {
+                            createHumanOtherLanguagesListener(newValue);
+                            break;
+                        }
+                        case 6: {
+                            createHumanYearTransistListener(newValue);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 4: {
+                    switch (currentRow) {
+                        case 0: {
+                            createMigratorYearListener(newValue);
+                            break;
+                        }
+                        case 1: {
+                            createMigratorMotherlandListener(newValue);
+                            break;
+                        }
+                        case 2: {
+                            createMigratorCurrentCountryListener(newValue);
+                            break;
+                        }
+                        case 3: {
+                            createMigratorPurposeListener(newValue);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                default: {
+
+                    break;
+                }
             }
-            case 2: {
-                break;
-            }
-            case 3: {
-                break;
-            }
-            case 4: {
-                break;
-            }
-            default: {
-                throw new IOException("Wrong selection");
-            }
-        }
+        });
+
+        firstFilterTextField.setDisable(false);
     }
-    /*@FXML
-    private void buildingTableOnSelect(){
-        if (masterDetailCheckBox.isSelected()){
-            flatTableView.setItems(getFlatIds(buildingTableView.getSelectionModel().getSelectedItem().getId()));
-        }
-    }
-    @FXML
-    private void flatTableOnSelect(){
-        if (masterDetailCheckBox.isSelected()){
-            householdTableView.setItems(getHouseholdsIds(flatTableView.getSelectionModel().getSelectedItem().getId()));
-        }
-    }
-    @FXML
-    private void householdTableOnSelect(){
-        if (masterDetailCheckBox.isSelected()){
-            humanTableView.setItems(getHumanIds(householdTableView.getSelectionModel().getSelectedItem().getId()));
-        }
-    }
-    @FXML
-    private void peopleTableOnSelect(){
-        if (masterDetailCheckBox.isSelected()){
-            migrationTableView.setItems(getMigrationIds(humanTableView.getSelectionModel().getSelectedItem().getId()));
-        }
-    }*/
     //endregion
 
     //region Updates
@@ -617,11 +669,17 @@ public class MainWindowController extends FormControllers implements Initializab
     }
 
     private void tablesUpdate(){
-        migrationTableView.setItems(migrationsData);
-        buildingTableView.setItems(buildingsData);
-        householdTableView.setItems(householdsData);
-        flatTableView.setItems(flatsData);
-        humanTableView.setItems(humansData);
+        ObservableList<MigrationTableView> migrationCopy = migrationsData;
+        ObservableList<BuildingTableView> buildingCopy = buildingsData;
+        ObservableList<HouseholdTableView> householdCopy = householdsData;
+        ObservableList<FlatTableView> flatCopy = flatsData;
+        ObservableList<HumanTableView> humanCopy = humansData;
+
+        migrationTableView.setItems(migrationCopy);
+        buildingTableView.setItems(buildingCopy);
+        householdTableView.setItems(householdCopy);
+        flatTableView.setItems(flatCopy);
+        humanTableView.setItems(humanCopy);
     }
 
 
@@ -664,8 +722,6 @@ public class MainWindowController extends FormControllers implements Initializab
             e.printStackTrace();
         }
     }
-
-
 
     //region get....Ids для реализации master-detail
     private ObservableList<BuildingTableView> getBuildingIds(int index){
@@ -720,4 +776,276 @@ public class MainWindowController extends FormControllers implements Initializab
         return setHumansData(temp, tempTwo);
     }
     //endregion
+    private ObservableList list;
+
+    @SuppressWarnings("unchecked")
+    private boolean renewFilterBuildings(String newValue, TableView tableView, ObservableList tableData){
+        list = FXCollections.observableArrayList();
+        dataSetsUpdate();
+
+        if (newValue.equals("")){
+            dataSetsUpdate();
+            tableView.getItems().clear();
+            tableView.setItems(tableData);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void createBuildingTypeListener(String newValue){
+        if (renewFilterBuildings(newValue, buildingTableView, buildingsData)){
+            return;
+        }
+
+        for (BuildingTableView x: buildingsData){
+            if(x.getHomeType().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        buildingTableView.getItems().clear();
+        buildingTableView.setItems(list);
+    }
+
+    private void createBuildingWallListener(String newValue){
+        if (renewFilterBuildings(newValue, buildingTableView, buildingsData)){
+            return;
+        }
+
+        for (BuildingTableView x: buildingsData){
+            if(x.getWallMaterial().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        buildingTableView.getItems().clear();
+        buildingTableView.setItems(list);
+    }
+
+    private void createFlatSquareListener(String newValue){
+        if (renewFilterBuildings(newValue, flatTableView, flatsData)){
+            return;
+        }
+
+        for (FlatTableView x: flatsData){
+            if(x.getSquare().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        flatTableView.getItems().clear();
+        flatTableView.setItems(list);
+    }
+
+    private void createFlatChamberListener(String newValue){
+        if (renewFilterBuildings(newValue, flatTableView, flatsData)){
+            return;
+        }
+
+        for (FlatTableView x: flatsData){
+            if(x.getChamberCount().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        flatTableView.getItems().clear();
+        flatTableView.setItems(list);
+    }
+
+    private void createHouseholdHumanListener(String newValue){
+        if (renewFilterBuildings(newValue, householdTableView, householdsData)){
+            return;
+        }
+
+        for (HouseholdTableView x: householdsData){
+            if(x.getPeopleCount().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        householdTableView.getItems().clear();
+        householdTableView.setItems(list);
+    }
+
+    private void createHouseholdChamberListener(String newValue){
+        if (renewFilterBuildings(newValue, householdTableView, householdsData)){
+            return;
+        }
+
+        for (HouseholdTableView x: householdsData){
+            if(x.getChamberCount().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        householdTableView.getItems().clear();
+        householdTableView.setItems(list);
+    }
+
+    private void createMigratorYearListener(String newValue){
+        if (renewFilterBuildings(newValue, migrationTableView, migrationsData)){
+            return;
+        }
+
+        for (MigrationTableView x: migrationsData){
+            if(x.getYear().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        migrationTableView.getItems().clear();
+        migrationTableView.setItems(list);
+    }
+
+    private void createMigratorMotherlandListener(String newValue){
+        if (renewFilterBuildings(newValue, migrationTableView, migrationsData)){
+            return;
+        }
+
+        for (MigrationTableView x: migrationsData){
+            if(x.getPermanentCountry().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        migrationTableView.getItems().clear();
+        migrationTableView.setItems(list);
+    }
+
+    private void createMigratorCurrentCountryListener(String newValue){
+        if (renewFilterBuildings(newValue, migrationTableView, migrationsData)){
+            return;
+        }
+
+        for (MigrationTableView x: migrationsData){
+            if(x.getMotherCountry().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        migrationTableView.getItems().clear();
+        migrationTableView.setItems(list);
+    }
+
+    private void createMigratorPurposeListener(String newValue){
+        if (renewFilterBuildings(newValue, migrationTableView, migrationsData)){
+            return;
+        }
+
+        for (MigrationTableView x: migrationsData){
+            if(x.getPurpose().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        migrationTableView.getItems().clear();
+        migrationTableView.setItems(list);
+    }
+
+    private void createHumanDateListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getBirthDate().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+
+    private void createHumanBirthplaceListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getBirthPlace().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+
+    private void createHumanCitizenshipListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getCitizenship().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+
+    private void createHumanNationalityListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getNationality().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+
+    private void createHumanOtherLanguagesListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getOtherLang().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+
+    private void createHumanMotherTongueListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getMotherTongue().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+
+    private void createHumanYearTransistListener(String newValue){
+        if (renewFilterBuildings(newValue, humanTableView, humansData)){
+            return;
+        }
+
+        for (HumanTableView x: humansData){
+            if(x.getYearWhereLive().toLowerCase().contains(newValue.toLowerCase())){
+                list.add(x);
+            }
+        }
+
+        humanTableView.getItems().clear();
+        humanTableView.setItems(list);
+    }
+    //TODO: прихуярить множество лисенеров. Тобi пизда
 }
