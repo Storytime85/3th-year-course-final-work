@@ -51,8 +51,8 @@
                                           <Label layoutX="5.0" layoutY="5.0" text="3. Дата вашего рождения" />
                                           <TextField fx:id="dayTextField" layoutX="10.0" layoutY="50.0" prefWidth="40.0" />
                                           <TextField fx:id="monthTextField" layoutX="60.0" layoutY="50.0" prefWidth="40.0" />
-                                          <TextField fx:id="yearTextField" layoutX="110.0" layoutY="50.0" prefWidth="80.0" />
-                                          <TextField fx:id="ageTextField" layoutX="230.0" layoutY="50.0" onKeyReleased="#areYouStudying" prefWidth="40.0" />
+                                          <TextField fx:id="yearTextField" layoutX="110.0" layoutY="50.0" onAction="#onTabYearTextField" prefWidth="80.0" />
+                                          <TextField fx:id="ageTextField" layoutX="230.0" layoutY="50.0" onKeyReleased="#areYouStudying" onMouseClicked="#ageTextFieldOnAction" prefWidth="40.0" />
                                           <Label layoutX="13.0" layoutY="30.0" text="Число" />
                                           <Label layoutX="62.0" layoutY="30.0" text="Месяц" />
                                           <Label layoutX="140.0" layoutY="30.0" text="Год" />

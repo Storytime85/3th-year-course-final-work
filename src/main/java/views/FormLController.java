@@ -18,6 +18,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class FormLController extends AddingControllers implements Initializable {
@@ -1229,4 +1232,25 @@ public class FormLController extends AddingControllers implements Initializable 
         return !noAnswerCheckBox.isSelected() && nationTextField.getText().isEmpty();
     }
 
+    private static int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+    @FXML
+    private void ageTextFieldOnAction(){
+        if (dayTextField.getText()!=null && monthTextField.getText()!=null && yearTextField.getText()!=null){
+            LocalDate birthdate = LocalDate.of(Integer.parseInt(yearTextField.getText()),
+                    Integer.parseInt(monthTextField.getText()),
+                    Integer.parseInt(dayTextField.getText()));
+
+            ageTextField.setText(Integer.toString(calculateAge(birthdate, LocalDate.now())));
+        }
+    }
+    @FXML
+    private void onTabYearTextField(){
+
+    }
 }

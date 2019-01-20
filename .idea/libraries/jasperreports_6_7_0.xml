@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="jasperreports-6.7.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../jasperreports-6.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../jasperreports-chart-customizers-6.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../jasperreports-chart-themes-6.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../jasperreports-custom-visualization-6.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../jasperreports-functions-6.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../jasperreports-javaflow-6.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

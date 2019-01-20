@@ -5,7 +5,15 @@ import javafx.collections.ObservableList;
 import persistence.abstracts.Listeners;
 
 public abstract class Lists extends Listeners {
-    //region
+    //region MainLists
+    protected static final ObservableList<String> tablesOptions =
+            FXCollections.observableArrayList(
+                    "Здания",
+                    "Квартиры",
+                    "Домохозяйства",
+                    "Люди",
+                    "Мигранты"
+            );
     protected static final ObservableList<String> yesNoOptions =
             FXCollections.observableArrayList(
                     "Да",
@@ -223,14 +231,7 @@ public abstract class Lists extends Listeners {
     //endregion
 
     //region Filters
-    protected static final ObservableList<String> tablesOptions =
-            FXCollections.observableArrayList(
-                    "Здания",
-                    "Квартиры",
-                    "Домохозяйства",
-                    "Люди",
-                    "Мигранты"
-            );
+
     protected static final ObservableList<String> buildingsOptions =
             FXCollections.observableArrayList(
                     "Тип жилища",
@@ -265,4 +266,95 @@ public abstract class Lists extends Listeners {
                     "Цель"
             );
     //endregion
+
+    //region pieChart
+    protected static final ObservableList<String> tablesPieChartOptions =
+            FXCollections.observableArrayList(
+                    "Здания",
+                    "Люди",
+                    "Мигранты"
+            );
+
+    protected static final ObservableList<String> migratorsPieChartOptions =
+            FXCollections.observableArrayList(
+                    "Цель прибытия"
+            );
+
+    protected static final ObservableList<String> humansPieChartOptions =
+            FXCollections.observableArrayList(
+                    "Кем приходится",
+                    "Брак",
+                    "Гражданство",
+                    "Образование",
+                    "Должность"
+            );
+
+    protected static final ObservableList<String> buildingsPieChartOptions =
+            FXCollections.observableArrayList(
+                    "Тип здания",
+                    "Дата возведения",
+                    "Материал стен",
+                    "Газ",
+                    "Отопление",
+                    "Вода",
+                    "Горячая вода",
+                    "Канализация",
+                    "Туалет",
+                    "Душ",
+                    "Мусоропровод",
+                    "Кухня"
+            );
+    //endregion
+
+    //region Charts
+    protected static final ObservableList<String> migratorsСhartOptions =
+            FXCollections.observableArrayList(
+                    "Цель прибытия",
+                    "Длительность пребывания"
+            );
+    protected static final ObservableList<String> buildingsChartOptions =
+            FXCollections.observableArrayList(
+                    "Тип здания",
+                    "Дата возведения",
+                    "Материал стен",
+                    "Газ",
+                    "Отопление",
+                    "Вода",
+                    "Горячая вода",
+                    "Канализация",
+                    "Туалет",
+                    "Душ",
+                    "Мусоропровод",
+                    "Кухня"
+            );
+    protected static final ObservableList<String> humansChartOptions =
+            FXCollections.observableArrayList(
+                    "Пол",
+                    "Кем приходится",
+                    "Возраст",
+                    "Брак",
+                    "Гражданство",
+                    "Национальность",
+                    "Образование",
+                    "Владение русским",
+                    "Должность",
+                    "Возраст первых родов",
+                    "Кол-во детей (только женщины)"
+            );
+    protected static final ObservableList<String> householdsChartOptions =
+            FXCollections.observableArrayList(
+                    "Число лиц",
+                    "Занимаемая площадь",
+                    "Доступ в интернет"
+            );
+    protected static final ObservableList<String> flatsChartOptions =
+            FXCollections.observableArrayList(
+                    "Площадь",
+                    "Число жителей",
+                    "Стационарная связь",
+                    "Телевизионная антенна",
+                    "Проводное радио"
+            );
+    //endregion
+
 }

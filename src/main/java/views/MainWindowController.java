@@ -9,6 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
@@ -29,6 +32,9 @@ public class MainWindowController extends FormControllers implements Initializab
 
     private int currentTable;
     private int currentRow;
+    private ObservableList list;
+    private int currentPieChartTable;
+    private int currentPieChartRow;
 
     //region Lists
     private List<dbBuildingtableEntity> buildings;
@@ -45,9 +51,23 @@ public class MainWindowController extends FormControllers implements Initializab
     private ObservableList<FlatTableView> flatsData;
     private ObservableList<HouseholdTableView> householdsData;
     private ObservableList<HumanTableView> humansData;
+
+    private ObservableList<PieChart.Data> mainPieChartData;
     //endregion
 
     //region FXML
+    @FXML
+    private ComboBox<String> firstChartComboBox;
+    @FXML
+    private ComboBox<String> secondChartComboBox;
+    @FXML
+    private ComboBox<String> thirdChartComboBox;
+    @FXML
+    private ComboBox<String> fourthChartComboBox;
+    @FXML
+    private PieChart mainPieChart;
+    @FXML
+    private BarChart mainBarChart;
     @FXML
     private ComboBox<String> tableSelectComboBox;
     @FXML
@@ -387,6 +407,7 @@ public class MainWindowController extends FormControllers implements Initializab
 
     private void initializeComboBoxes(){
         tableSelectComboBox.setItems(tablesOptions);
+        thirdChartComboBox.setItems(tablesPieChartOptions);
     }
     //endregion
 
@@ -513,7 +534,6 @@ public class MainWindowController extends FormControllers implements Initializab
                 throw new IOException("Wrong selection");
             }
         }
-
     }
     @FXML
     private void rowSelectComboBoxOnSelect(){
@@ -626,6 +646,36 @@ public class MainWindowController extends FormControllers implements Initializab
         });
 
         firstFilterTextField.setDisable(false);
+    }
+    @FXML
+    private void thirdChartComboBoxOnSelect() throws IOException {
+        int index = thirdChartComboBox.getSelectionModel().getSelectedIndex();
+        fourthChartComboBox.setItems(null);
+        switch (index){
+            case 0:{
+                fourthChartComboBox.setItems(buildingsPieChartOptions);
+                break;
+            }
+            case 1:{
+                fourthChartComboBox.setItems(humansPieChartOptions);
+                break;
+            }
+            case 2:{
+                fourthChartComboBox.setItems(migratorsPieChartOptions);
+                break;
+            }
+            default : {
+                throw new IOException("Wrong selection");
+            }
+        }
+    }
+    @FXML
+    private void fourthChartComboBoxOnSelect(){
+        currentPieChartTable = thirdChartComboBox.getSelectionModel().getSelectedIndex();
+        currentPieChartRow = fourthChartComboBox.getSelectionModel().getSelectedIndex();
+        if (currentPieChartRow >= 0) {
+            createNewPieChart();
+        }
     }
     //endregion
 
@@ -776,7 +826,6 @@ public class MainWindowController extends FormControllers implements Initializab
         return setHumansData(temp, tempTwo);
     }
     //endregion
-    private ObservableList list;
 
     @SuppressWarnings("unchecked")
     private boolean renewFilterBuildings(String newValue, TableView tableView, ObservableList tableData){
@@ -793,6 +842,7 @@ public class MainWindowController extends FormControllers implements Initializab
         }
     }
 
+    //region listeners
     private void createBuildingTypeListener(String newValue){
         if (renewFilterBuildings(newValue, buildingTableView, buildingsData)){
             return;
@@ -1047,5 +1097,329 @@ public class MainWindowController extends FormControllers implements Initializab
         humanTableView.getItems().clear();
         humanTableView.setItems(list);
     }
-    //TODO: прихуярить множество лисенеров. Тобi пизда
+    //endregion
+
+    //region PieChart
+    private void createNewPieChart(){
+        switch (currentPieChartTable){
+            case 0:{
+                mainPieChart.setTitle(buildingsPieChartOptions.get(currentPieChartRow));
+                switch (currentPieChartRow){
+                    case 0:{
+                        mainPieChartData = homeTypePieChartDataSetValues(createPieData(buildingTypesOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 1:{
+                        mainPieChartData = foundedPieChartDataSetValues(createPieData(foundationOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 2:{
+                        mainPieChartData = materialPieChartDataSetValues(createPieData(materialOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 3:{
+                        mainPieChartData = gasPieChartDataSetValues(createPieData(gasOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 4:{
+                        mainPieChartData = heatPieChartDataSetValues(createPieData(heatOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 5:{
+                        mainPieChartData = waterPieChartDataSetValues(createPieData(waterOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 6:{
+                        mainPieChartData = hotWaterPieChartDataSetValues(createPieData(hotWaterOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 7:{
+                        mainPieChartData = canalisationPieChartDataSetValues(createPieData(canalisationOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 8:{
+                        mainPieChartData = closetPieChartDataSetValues(createPieData(toiletOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 9:{
+                        mainPieChartData = showerPieChartDataSetValues(createPieData(bathOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 10:{
+                        mainPieChartData = garbagePieChartDataSetValues(createPieData(garbageOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 11:{
+                        mainPieChartData = kitchenPieChartDataSetValues(createPieData(kitchenOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                }
+                break;
+            }
+            case 1:{
+                mainPieChart.setTitle(humansPieChartOptions.get(currentPieChartRow));
+                switch (currentPieChartRow){
+                    case 0:{
+                        mainPieChartData = whoIsPieChartDataSetValues(createPieData(relativesOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 1:{
+                        mainPieChartData = marriagePieChartDataSetValues(createPieData(weddingOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 2:{
+                        mainPieChartData = citizenshipPieChartDataSetValues(createPieData(citizenshipOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 3:{
+                        mainPieChartData = educationPieChartDataSetValues(createPieData(educationOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                    case 4:{
+                        mainPieChartData = positionPieChartDataSetValues(createPieData(positionOptions));
+                        mainPieChart.setData(mainPieChartData);
+                        break;
+                    }
+                }
+                break;
+            }
+            case 2:{
+                mainPieChart.setTitle(migratorsPieChartOptions.get(currentPieChartRow));
+
+                mainPieChartData = purposePieChartDataSetValues(createPieData(purposeOptions));
+                mainPieChart.setData(mainPieChartData);
+                break;
+            }
+        }
+    }
+
+    private ObservableList<PieChart.Data> createPieData(ObservableList<String> list){
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (String x : list){
+            pieChartData.add(new PieChart.Data(x,0));
+        }
+
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> purposePieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbMigrationtableEntity x : migrations){
+            double pieValue = pieChartData.get(x.getPurpose()).getPieValue();
+            pieChartData.get(x.getPurpose()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> whoIsPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbHumantableEntity x : humans){
+            double pieValue = pieChartData.get(x.getWhoIs()).getPieValue();
+            pieChartData.get(x.getWhoIs()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> marriagePieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbHumantableEntity x : humans){
+            if (x.getMarriage() == null){
+                double pieValue = pieChartData.get(pieChartData.size()-1).getPieValue();
+                pieChartData.get(pieChartData.size()-1).setPieValue(++pieValue);
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getMarriage()).getPieValue();
+            pieChartData.get(x.getMarriage()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> citizenshipPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbHumantableEntity x : humans){
+            if (x.getCitizenship() == null){
+                double pieValue = pieChartData.get(pieChartData.size()-1).getPieValue();
+                pieChartData.get(pieChartData.size()-1).setPieValue(++pieValue);
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getCitizenship()).getPieValue();
+            pieChartData.get(x.getCitizenship()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> educationPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        pieChartData.add(new PieChart.Data("Нет данных", 0));
+
+        for (dbHumantableEntity x : humans){
+            if (x.getEducation() == null){
+                double pieValue = pieChartData.get(pieChartData.size()-1).getPieValue();
+                pieChartData.get(pieChartData.size()-1).setPieValue(++pieValue);
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getEducation()).getPieValue();
+            pieChartData.get(x.getEducation()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> positionPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        pieChartData.add(new PieChart.Data("Нет данных", 0));
+
+        for (dbHumantableEntity x : humans){
+            if (x.getPosition() == null){
+                double pieValue = pieChartData.get(pieChartData.size()-1).getPieValue();
+                pieChartData.get(pieChartData.size()-1).setPieValue(++pieValue);
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getPosition()).getPieValue();
+            pieChartData.get(x.getPosition()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> homeTypePieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            double pieValue = pieChartData.get(x.getHomeType()).getPieValue();
+            pieChartData.get(x.getHomeType()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> foundedPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getDateFound() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getDateFound()).getPieValue();
+            pieChartData.get(x.getDateFound()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> materialPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getDateFound() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getWallMaterial()).getPieValue();
+            pieChartData.get(x.getWallMaterial()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> gasPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getGas() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getGas()).getPieValue();
+            pieChartData.get(x.getGas()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> heatPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getHeat() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getHeat()).getPieValue();
+            pieChartData.get(x.getHeat()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> waterPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getWater() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getWater()).getPieValue();
+            pieChartData.get(x.getWater()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> hotWaterPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getHotWater() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getHotWater()).getPieValue();
+            pieChartData.get(x.getHotWater()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> canalisationPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getCanalisation() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getCanalisation()).getPieValue();
+            pieChartData.get(x.getCanalisation()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> closetPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getCloset() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getCloset()).getPieValue();
+            pieChartData.get(x.getCloset()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> showerPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getShower() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getShower()).getPieValue();
+            pieChartData.get(x.getShower()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> garbagePieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getGarbage() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getGarbage()).getPieValue();
+            pieChartData.get(x.getGarbage()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    private ObservableList<PieChart.Data> kitchenPieChartDataSetValues(ObservableList<PieChart.Data> pieChartData){
+        for (dbBuildingtableEntity x : buildings){
+            if (x.getKitchen() == null){
+                continue;
+            }
+            double pieValue = pieChartData.get(x.getKitchen()).getPieValue();
+            pieChartData.get(x.getKitchen()).setPieValue(++pieValue);
+        }
+        return pieChartData;
+    }
+
+    //endregion
+
+
 }

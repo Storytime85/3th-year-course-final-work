@@ -167,13 +167,7 @@ public class Household extends Listeners {
     }
 
     private void createOnAction(){
-        partChamberCheckBox.setOnAction(new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent event) {
-                onActionProperty().get().handle(event);
-            }
-        });
+        partChamberCheckBox.setOnAction(event -> onActionProperty().get().handle(event));
     }
     //endregion
 
