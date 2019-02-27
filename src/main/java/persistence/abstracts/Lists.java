@@ -267,47 +267,8 @@ public abstract class Lists extends Listeners {
             );
     //endregion
 
-    //region pieChart
-    protected static final ObservableList<String> tablesPieChartOptions =
-            FXCollections.observableArrayList(
-                    "Здания",
-                    "Люди",
-                    "Мигранты"
-            );
-
-    protected static final ObservableList<String> migratorsPieChartOptions =
-            FXCollections.observableArrayList(
-                    "Цель прибытия"
-            );
-
-    protected static final ObservableList<String> humansPieChartOptions =
-            FXCollections.observableArrayList(
-                    "Кем приходится",
-                    "Брак",
-                    "Гражданство",
-                    "Образование",
-                    "Должность"
-            );
-
-    protected static final ObservableList<String> buildingsPieChartOptions =
-            FXCollections.observableArrayList(
-                    "Тип здания",
-                    "Дата возведения",
-                    "Материал стен",
-                    "Газ",
-                    "Отопление",
-                    "Вода",
-                    "Горячая вода",
-                    "Канализация",
-                    "Туалет",
-                    "Душ",
-                    "Мусоропровод",
-                    "Кухня"
-            );
-    //endregion
-
     //region Charts
-    protected static final ObservableList<String> migratorsСhartOptions =
+    protected static final ObservableList<String> migratorsChartOptions =
             FXCollections.observableArrayList(
                     "Цель прибытия",
                     "Длительность пребывания"
@@ -357,4 +318,24 @@ public abstract class Lists extends Listeners {
             );
     //endregion
 
+    protected static final ObservableList<String> reportTypeOptions =
+            FXCollections.observableArrayList(
+                    "Здания",
+                    "Квартиры",
+                    "Домохозяйства",
+                    "Мигранты",
+                    "Национальности, гражданства и статус брака",
+                    "Образование",
+                    "Статус работы",
+                    "Дети (только женщины)"
+            );
+
+    protected static final ObservableList<String> reportNameOptions =
+            FXCollections.observableArrayList(
+                    "PDF",
+                    "HTML",
+                    "DOCX",
+                    "XML"
+
+            );
 }

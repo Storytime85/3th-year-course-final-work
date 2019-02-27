@@ -283,7 +283,7 @@ public class dbHumantableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "Position", nullable = true)
+    @Column(name = "Pose", nullable = true)
     public Integer getPosition() {
         return position;
     }

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
@@ -144,8 +145,6 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <PieChart fx:id="mainPieChart" layoutX="27.0" layoutY="320.0" prefHeight="352.0" prefWidth="408.0" />
-                              <ComboBox fx:id="firstChartComboBox" layoutX="481.0" layoutY="28.0" prefWidth="150.0" />
-                              <ComboBox fx:id="secondChartComboBox" layoutX="481.0" layoutY="76.0" prefWidth="150.0" />
                               <ComboBox fx:id="thirdChartComboBox" layoutX="481.0" layoutY="339.0" onAction="#thirdChartComboBoxOnSelect" prefWidth="150.0" />
                               <ComboBox fx:id="fourthChartComboBox" layoutX="481.0" layoutY="384.0" onAction="#fourthChartComboBoxOnSelect" prefWidth="150.0" />
                               <BarChart fx:id="mainBarChart" layoutX="14.0" layoutY="14.0" prefHeight="306.0" prefWidth="461.0" title="Temp">
@@ -156,6 +155,15 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </BarChart>
+                              <LineChart fx:id="mainLineChart" layoutX="150.0" layoutY="14.0" prefHeight="241.0" prefWidth="299.0" title="Temp">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <Button fx:id="clearButton" layoutX="532.0" layoutY="277.0" mnemonicParsing="false" onAction="#clearButtonOnClick" text="Очистить" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -178,10 +186,9 @@
                         <TextField fx:id="firstFilterTextField" disable="true" layoutX="8.0" layoutY="503.0" prefWidth="120.0" />
                      </children>
                   </Pane>
-                  <ComboBox layoutX="14.0" layoutY="548.0" prefWidth="150.0" />
-                  <ComboBox layoutX="14.0" layoutY="587.0" prefWidth="150.0" />
-                  <TextField layoutY="639.0" prefHeight="31.0" prefWidth="113.0" />
-                  <TextField layoutX="127.0" layoutY="639.0" prefHeight="31.0" prefWidth="113.0" />
+                  <Button fx:id="createReportButton" layoutX="46.0" layoutY="682.0" mnemonicParsing="false" onAction="#createReportButtonClick" text="Создать отчет" />
+                  <ComboBox fx:id="firstReportComboBox" layoutX="14.0" layoutY="534.0" prefWidth="150.0" />
+                  <ComboBox fx:id="secondReportComboBox" layoutX="14.0" layoutY="582.0" prefWidth="150.0" />
                </children>
             </AnchorPane>
         </items>

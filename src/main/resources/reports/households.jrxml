@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Coffee" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b43d640e-9ded-41d6-a748-fbd194d22351">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\main\resources\reports\DataAdapter.xml"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT a.PeopleCount, a.ChamberCount, a.Internet
+FROM householdtable a]]>
+	</queryString>
+	<field name="PeopleCount" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="PeopleCount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="householdtable"/>
+	</field>
+	<field name="ChamberCount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ChamberCount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="householdtable"/>
+	</field>
+	<field name="Internet" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="Internet"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="householdtable"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="164" height="126" uuid="2bfe1de0-fb1a-41c5-9b66-46432c46bfd0"/>
+				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="170" y="0" width="263" height="62" uuid="df8a1e69-d3e9-4649-b275-f6f81f3326ee"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Coffee Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="219" y="62" width="196" height="22" uuid="b163cb1e-7c5d-4819-9041-9c683021e46e"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee SubTitle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="94" width="383" height="42" uuid="f5a85ec4-8001-4b1f-98e2-ca7cd424546e"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="433" y="-115" width="267" height="209" uuid="034a623c-4de8-4c62-bc8c-e86ddec7d3d0"/>
+				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="9928f400-5d2f-4bcb-85d6-bd0b7c6e7ce7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="185" height="15" forecolor="#736343" uuid="c1d2d0e6-b9d5-410b-a9ad-0f118db46360">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="00626783-df2c-41a1-b4af-7d8150cb7dd5"/>
+				</reportElement>
+				<text><![CDATA[PeopleCount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="185" y="0" width="185" height="15" forecolor="#736343" uuid="831f0830-3865-4cad-bcf4-55b59bed80e5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19bac3fd-5feb-4846-94a2-dc9de0b90c3b"/>
+				</reportElement>
+				<text><![CDATA[ChamberCount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="370" y="0" width="185" height="15" forecolor="#736343" uuid="9c0fb9f9-8c88-4548-949f-ea8033632652">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="25a70f70-1cdd-44c2-afd7-384983a7eb4e"/>
+				</reportElement>
+				<text><![CDATA[Internet]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="6d8b7c53-a3cd-43ed-bff3-65ac2d15d5b8"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="185" height="15" uuid="861c9b64-f66b-4f12-9426-6b8d428e6e29">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="00626783-df2c-41a1-b4af-7d8150cb7dd5"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{PeopleCount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="185" y="0" width="185" height="15" uuid="6ad1074c-ed3a-4c5e-aa2f-a6d94f361428">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19bac3fd-5feb-4846-94a2-dc9de0b90c3b"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[IF($F{ChamberCount}<1,$F{ChamberCount},$F{ChamberCount}.intValue())]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="370" y="0" width="185" height="15" uuid="0dfecae7-95b4-4862-99e4-fccea084be78">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="25a70f70-1cdd-44c2-afd7-384983a7eb4e"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[IF($F{Internet},"Да","Нет")]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="3b5f567c-d43c-4029-ba2f-14ee056e0b9f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="d6676162-cfbd-49db-b571-4459795f3ce2"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="a30683ab-3691-4561-912a-3fa9f4f9e8e2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="727b732b-a108-4d9f-820c-bd153a026167"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="416169c3-3053-4548-a477-9e35844f8205"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

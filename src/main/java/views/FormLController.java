@@ -170,8 +170,8 @@ public class FormLController extends AddingControllers implements Initializable 
     private Label twelfthLabel;
     @FXML
     private Label thirteenthLabel;
-    @FXML
-    private Label fourteenthLabel;
+//    @FXML
+//    private Label fourteenthLabel;
     @FXML
     private Label fifteenthLabel;
     @FXML
@@ -192,8 +192,8 @@ public class FormLController extends AddingControllers implements Initializable 
     private Label errorLabel2;
     @FXML
     private Label twentySecondLabel;
-    @FXML
-    private Label twentyThirdLabel;
+//    @FXML
+//    private Label twentyThirdLabel;
     @FXML
     private Label twentyFourthLabel;
     @FXML
@@ -206,10 +206,10 @@ public class FormLController extends AddingControllers implements Initializable 
     private Label twentyEighthLabel;
     @FXML
     private Label twentyNinethLabel;
-    @FXML
-    private Label thirtiethLabel;
-    @FXML
-    private Label thirtyFirstLabel;
+//    @FXML
+//    private Label thirtiethLabel;
+//    @FXML
+//    private Label thirtyFirstLabel;
     @FXML
     private Label thirtySecondLabel;
     @FXML
@@ -272,6 +272,7 @@ public class FormLController extends AddingControllers implements Initializable 
         } else {
             switchElevenPointOne(true);
         }
+        areYouInKindergarden();
 
     }
     @FXML
@@ -279,7 +280,7 @@ public class FormLController extends AddingControllers implements Initializable 
         if (ageTextField.getText().equals(""))
             return;
         if (checkNumberInRange(ageTextField.getText(), 0, 10) &&
-                areYouStudyingComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                areYouStudyingComboBox.getSelectionModel().getSelectedIndex() != 1) {
             kindergardenComboBox.setDisable(false);
             eleventhLabel.setDisable(false);
             twelfthLabel.setDisable(false);
@@ -293,11 +294,11 @@ public class FormLController extends AddingControllers implements Initializable 
     private void checkBoxCheck() {
         if (checkBoxChecking() > 1) {
             thirteenthLabel.setDisable(false);
-            fourteenthLabel.setDisable(false);
+            //fourteenthLabel.setDisable(false);
             manySourcesTextField.setDisable(false);
         } else {
             thirteenthLabel.setDisable(true);
-            fourteenthLabel.setDisable(true);
+           // fourteenthLabel.setDisable(true);
             manySourcesTextField.setDisable(true);
         }
     }
@@ -733,8 +734,8 @@ public class FormLController extends AddingControllers implements Initializable 
 
     //region Switchers
     private void switchElevenPointOne(boolean switcher) {
-        thirtiethLabel.setDisable(switcher);
-        thirtyFirstLabel.setDisable(switcher);
+        //thirtiethLabel.setDisable(switcher);
+        //thirtyFirstLabel.setDisable(switcher);
         thirtySecondLabel.setDisable(switcher);
         workComboBox.setDisable(switcher);
     }
@@ -771,7 +772,7 @@ public class FormLController extends AddingControllers implements Initializable 
 
     private void switchTwelvePointTwo(boolean switcher) {
         twentySecondLabel.setDisable(switcher);
-        twentyThirdLabel.setDisable(switcher);
+        //twentyThirdLabel.setDisable(switcher);
         twentyFourthLabel.setDisable(switcher);
         typeOfLocalityComboBox.setDisable(switcher);
         subjectBeforeTextField.setDisable(switcher);
@@ -888,7 +889,7 @@ public class FormLController extends AddingControllers implements Initializable 
         }
 
         if (!yearOfArrivalTextField.isDisabled()){
-            human.setYearWhereLive(Date.valueOf(yearOfArrivalTextField.getText() + "-0-0"));
+            human.setYearWhereLive(Date.valueOf(yearOfArrivalTextField.getText()));
         }
 
         if (!subjectBeforeTextField.isDisabled()) {
@@ -902,7 +903,6 @@ public class FormLController extends AddingControllers implements Initializable 
         if (!childrenTextField.isDisabled()){
             human.setChildCount(Integer.parseInt(childrenTextField.getText()));
         }
-
     }
 
     private String getNation(){
@@ -1152,7 +1152,7 @@ public class FormLController extends AddingControllers implements Initializable 
         }
     }
 
-    private int addSalaries(){
+    private int addSalaries() {
         try {
             int salariesId;
             Socket socket = new Socket(host, port);
@@ -1232,13 +1232,6 @@ public class FormLController extends AddingControllers implements Initializable 
         return !noAnswerCheckBox.isSelected() && nationTextField.getText().isEmpty();
     }
 
-    private static int calculateAge(LocalDate birthDate, LocalDate currentDate) {
-        if ((birthDate != null) && (currentDate != null)) {
-            return Period.between(birthDate, currentDate).getYears();
-        } else {
-            return 0;
-        }
-    }
     @FXML
     private void ageTextFieldOnAction(){
         if (dayTextField.getText()!=null && monthTextField.getText()!=null && yearTextField.getText()!=null){
@@ -1247,10 +1240,7 @@ public class FormLController extends AddingControllers implements Initializable 
                     Integer.parseInt(dayTextField.getText()));
 
             ageTextField.setText(Integer.toString(calculateAge(birthdate, LocalDate.now())));
+            areYouStudying();
         }
-    }
-    @FXML
-    private void onTabYearTextField(){
-
     }
 }

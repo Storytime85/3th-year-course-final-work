@@ -312,7 +312,7 @@ public class FormVController extends AddingControllers implements Initializable 
         }
 
         if (!foundationTimeComboBox.isDisabled()){
-            building.setHomeType(foundationTimeComboBox.getSelectionModel().getSelectedIndex());
+            building.setDateFound(foundationTimeComboBox.getSelectionModel().getSelectedIndex());
         }
 
         if (!wallsMaterialComboBox.isDisabled()){

@@ -223,7 +223,7 @@ public class HumanTableView extends TableViews {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
-        return intToStringWithZero(cal.get(Calendar.DAY_OF_MONTH)) + "." + intToStringWithZero(cal.get(Calendar.MONTH)) +
+        return intToStringWithZero(cal.get(Calendar.DAY_OF_MONTH)) + "." + intToStringWithZero(cal.get(Calendar.MONTH)+1) +
                 "." + cal.get(Calendar.YEAR);
     }
 

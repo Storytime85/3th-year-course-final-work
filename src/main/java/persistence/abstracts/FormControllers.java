@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDate;
+import java.time.Period;
 
 
 public abstract class FormControllers extends Lists {
@@ -102,6 +104,14 @@ public abstract class FormControllers extends Lists {
             }
         }catch (IOException e){
             System.out.println("Ошибка");
+        }
+    }
+
+    protected int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
         }
     }
 }

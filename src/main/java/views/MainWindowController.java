@@ -9,15 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import persistence.abstracts.AddingControllers;
 import persistence.abstracts.FormControllers;
+import reports.ReportTemplate;
 import tableviews.*;
 
 import java.io.DataOutputStream;
@@ -25,16 +24,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class MainWindowController extends FormControllers implements Initializable {
+
     private UsersEntity user = new UsersEntity();
 
     private int currentTable;
     private int currentRow;
     private ObservableList list;
-    private int currentPieChartTable;
-    private int currentPieChartRow;
+    private int currentChartTable;
+    private int currentChartRow;
 
     //region Lists
     private List<dbBuildingtableEntity> buildings;
@@ -52,10 +53,25 @@ public class MainWindowController extends FormControllers implements Initializab
     private ObservableList<HouseholdTableView> householdsData;
     private ObservableList<HumanTableView> humansData;
 
-    private ObservableList<PieChart.Data> mainPieChartData;
+    private ObservableList<PieChart.Data> pieChartData;
+    private ObservableList<XYChart.Data<Number, Number>> lineChartData;
+    private ObservableList<XYChart.Data> barChartData;
+
+    private XYChart.Series<Number, Number> lineSeries;
+    private XYChart.Series barSeries;
     //endregion
 
-    //region FXML
+    //region FXML items
+    @FXML
+    private Button createReportButton;
+    @FXML
+    private ComboBox firstReportComboBox;
+    @FXML
+    private ComboBox secondReportComboBox;
+    @FXML
+    private Button clearButton;
+    @FXML
+    private LineChart<Number, Number> mainLineChart;
     @FXML
     private ComboBox<String> firstChartComboBox;
     @FXML
@@ -67,7 +83,7 @@ public class MainWindowController extends FormControllers implements Initializab
     @FXML
     private PieChart mainPieChart;
     @FXML
-    private BarChart mainBarChart;
+    private BarChart<Number, Number> mainBarChart;
     @FXML
     private ComboBox<String> tableSelectComboBox;
     @FXML
@@ -259,15 +275,27 @@ public class MainWindowController extends FormControllers implements Initializab
         List <HumanTableView> temp = new ArrayList<>();
         for (dbHumantableEntity h : list){
             int what = checkSalaries(h);
-            if (what == -1){
+            temp.add(new HumanTableView(h, getSalary(what,listTwo)));
+           /* if (what == -1){
                 temp.add(new HumanTableView(h, null));
             } else {
                 temp.add(new HumanTableView(h, listTwo.get(what)));
-            }
+            }*/
         }
         return FXCollections.observableList(temp);
     }
-
+    private dbSalariestableEntity getSalary(int index, List<dbSalariestableEntity> listTwo){
+        if (index == -1){
+            return null;
+        } else {
+            for (dbSalariestableEntity x : listTwo) {
+                if (x.getSalaryId() == index) {
+                    return x;
+                }
+            }
+        }
+        return null;
+    }
     private ObservableList<FlatTableView> setFlatsData(List<dbFlattableEntity> list){
         List <FlatTableView> temp = new ArrayList<>();
         for (dbFlattableEntity h : list){
@@ -289,6 +317,15 @@ public class MainWindowController extends FormControllers implements Initializab
     @Override
     @SuppressWarnings("unchecked")
     public void initialize(URL location, ResourceBundle resources) {
+        pieChartData = FXCollections.observableArrayList();
+        lineChartData = FXCollections.observableArrayList();
+        barChartData = FXCollections.observableArrayList();
+        lineSeries = new XYChart.Series(lineChartData);
+        barSeries = new XYChart.Series(barChartData);
+        mainLineChart.getData().setAll(lineSeries);
+        mainBarChart.getData().setAll(barSeries);
+        mainBarChart.setBarGap(0.0);
+
         readHostAndPort();
         createOrUpdateLists();
         initializeComboBoxes();
@@ -407,11 +444,27 @@ public class MainWindowController extends FormControllers implements Initializab
 
     private void initializeComboBoxes(){
         tableSelectComboBox.setItems(tablesOptions);
-        thirdChartComboBox.setItems(tablesPieChartOptions);
+        thirdChartComboBox.setItems(tablesOptions);
+        firstReportComboBox.setItems(reportTypeOptions);
+        secondReportComboBox.setItems(reportNameOptions);
     }
     //endregion
 
     //region FXML Methods
+    @FXML
+    private void createReportButtonClick(){
+        if(firstReportComboBox.getSelectionModel().getSelectedIndex()!=-1 &&
+                secondReportComboBox.getSelectionModel().getSelectedIndex()!=-1){
+            ReportTemplate report = new ReportTemplate();
+            report.showReport("flats.jrxml");
+        }
+    }
+    @FXML
+    private void clearButtonOnClick(){
+        disableAllCharts();
+        thirdChartComboBox.getSelectionModel().select(-1);
+        fourthChartComboBox.setItems(null);
+    }
     @FXML
     private void masterDetailCheckBoxClick(){
         if (!masterDetailCheckBox.isSelected()){
@@ -503,37 +556,13 @@ public class MainWindowController extends FormControllers implements Initializab
         masterDetailCheckBox.setSelected(false);
     }
     @FXML
-    private void tableSelectComboBoxOnSelect() throws IOException {
+    private void tableSelectComboBoxOnSelect(){
         tablesUpdate();
         firstFilterTextField.setText("");
         int index = tableSelectComboBox.getSelectionModel().getSelectedIndex();
         rowSelectComboBox.setItems(null);
         firstFilterTextField.setDisable(true);
-        switch (index){
-            case 0:{
-                rowSelectComboBox.setItems(buildingsOptions);
-                break;
-            }
-            case 1:{
-                rowSelectComboBox.setItems(flatsOptions);
-                break;
-            }
-            case 2:{
-                rowSelectComboBox.setItems(householdsOptions);
-                break;
-            }
-            case 3:{
-                rowSelectComboBox.setItems(peopleOptions);
-                break;
-            }
-            case 4:{
-                rowSelectComboBox.setItems(migratorsOptions);
-                break;
-            }
-            default : {
-                throw new IOException("Wrong selection");
-            }
-        }
+        switchComboBox(index, rowSelectComboBox);
     }
     @FXML
     private void rowSelectComboBoxOnSelect(){
@@ -648,33 +677,17 @@ public class MainWindowController extends FormControllers implements Initializab
         firstFilterTextField.setDisable(false);
     }
     @FXML
-    private void thirdChartComboBoxOnSelect() throws IOException {
+    private void thirdChartComboBoxOnSelect(){
         int index = thirdChartComboBox.getSelectionModel().getSelectedIndex();
         fourthChartComboBox.setItems(null);
-        switch (index){
-            case 0:{
-                fourthChartComboBox.setItems(buildingsPieChartOptions);
-                break;
-            }
-            case 1:{
-                fourthChartComboBox.setItems(humansPieChartOptions);
-                break;
-            }
-            case 2:{
-                fourthChartComboBox.setItems(migratorsPieChartOptions);
-                break;
-            }
-            default : {
-                throw new IOException("Wrong selection");
-            }
-        }
+        switchComboBox(index, fourthChartComboBox);
     }
     @FXML
     private void fourthChartComboBoxOnSelect(){
-        currentPieChartTable = thirdChartComboBox.getSelectionModel().getSelectedIndex();
-        currentPieChartRow = fourthChartComboBox.getSelectionModel().getSelectedIndex();
-        if (currentPieChartRow >= 0) {
-            createNewPieChart();
+        currentChartTable = thirdChartComboBox.getSelectionModel().getSelectedIndex();
+        currentChartRow = fourthChartComboBox.getSelectionModel().getSelectedIndex();
+        if (currentChartRow >= 0) {
+            createNewChart();
         }
     }
     //endregion
@@ -773,7 +786,7 @@ public class MainWindowController extends FormControllers implements Initializab
         }
     }
 
-    //region get....Ids для реализации master-detail
+    //region get....Ids
     private ObservableList<BuildingTableView> getBuildingIds(int index){
         List<dbBuildingtableEntity> temp = new ArrayList<>();
         for(dbBuildingtableEntity b: buildings){
@@ -1100,114 +1113,6 @@ public class MainWindowController extends FormControllers implements Initializab
     //endregion
 
     //region PieChart
-    private void createNewPieChart(){
-        switch (currentPieChartTable){
-            case 0:{
-                mainPieChart.setTitle(buildingsPieChartOptions.get(currentPieChartRow));
-                switch (currentPieChartRow){
-                    case 0:{
-                        mainPieChartData = homeTypePieChartDataSetValues(createPieData(buildingTypesOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 1:{
-                        mainPieChartData = foundedPieChartDataSetValues(createPieData(foundationOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 2:{
-                        mainPieChartData = materialPieChartDataSetValues(createPieData(materialOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 3:{
-                        mainPieChartData = gasPieChartDataSetValues(createPieData(gasOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 4:{
-                        mainPieChartData = heatPieChartDataSetValues(createPieData(heatOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 5:{
-                        mainPieChartData = waterPieChartDataSetValues(createPieData(waterOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 6:{
-                        mainPieChartData = hotWaterPieChartDataSetValues(createPieData(hotWaterOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 7:{
-                        mainPieChartData = canalisationPieChartDataSetValues(createPieData(canalisationOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 8:{
-                        mainPieChartData = closetPieChartDataSetValues(createPieData(toiletOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 9:{
-                        mainPieChartData = showerPieChartDataSetValues(createPieData(bathOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 10:{
-                        mainPieChartData = garbagePieChartDataSetValues(createPieData(garbageOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 11:{
-                        mainPieChartData = kitchenPieChartDataSetValues(createPieData(kitchenOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                }
-                break;
-            }
-            case 1:{
-                mainPieChart.setTitle(humansPieChartOptions.get(currentPieChartRow));
-                switch (currentPieChartRow){
-                    case 0:{
-                        mainPieChartData = whoIsPieChartDataSetValues(createPieData(relativesOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 1:{
-                        mainPieChartData = marriagePieChartDataSetValues(createPieData(weddingOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 2:{
-                        mainPieChartData = citizenshipPieChartDataSetValues(createPieData(citizenshipOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 3:{
-                        mainPieChartData = educationPieChartDataSetValues(createPieData(educationOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                    case 4:{
-                        mainPieChartData = positionPieChartDataSetValues(createPieData(positionOptions));
-                        mainPieChart.setData(mainPieChartData);
-                        break;
-                    }
-                }
-                break;
-            }
-            case 2:{
-                mainPieChart.setTitle(migratorsPieChartOptions.get(currentPieChartRow));
-
-                mainPieChartData = purposePieChartDataSetValues(createPieData(purposeOptions));
-                mainPieChart.setData(mainPieChartData);
-                break;
-            }
-        }
-    }
 
     private ObservableList<PieChart.Data> createPieData(ObservableList<String> list){
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
@@ -1421,5 +1326,561 @@ public class MainWindowController extends FormControllers implements Initializab
 
     //endregion
 
+    //region Charts
 
+    private void createNewChart(){
+        switch (currentChartTable){
+            case 0:{
+                switchZero();
+                break;
+            }
+            case 1:{
+                switchOne();
+                break;
+            }
+            case 2:{
+                switchTwo();
+                break;
+            }
+            case 3:{
+                switchThree();
+                break;
+            }
+            case 4:{
+                switchFour();
+                break;
+            }
+        }
+        mainPieChart.setTitle(fourthChartComboBox.getSelectionModel().getSelectedItem());
+        mainPieChart.setLabelsVisible(false);
+    }
+
+    private void switchZero(){
+        switch (currentChartRow){
+            case 0:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = homeTypePieChartDataSetValues(createPieData(buildingTypesOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 1:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = foundedPieChartDataSetValues(createPieData(foundationOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 2:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = materialPieChartDataSetValues(createPieData(materialOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 3:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = gasPieChartDataSetValues(createPieData(gasOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 4:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = heatPieChartDataSetValues(createPieData(heatOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 5:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = waterPieChartDataSetValues(createPieData(waterOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 6:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = hotWaterPieChartDataSetValues(createPieData(hotWaterOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 7:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = canalisationPieChartDataSetValues(createPieData(canalisationOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 8:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = closetPieChartDataSetValues(createPieData(toiletOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 9:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = showerPieChartDataSetValues(createPieData(bathOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 10:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = garbagePieChartDataSetValues(createPieData(garbageOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 11:{
+                setPieChartVisible();
+                mainPieChart.setTitle(buildingsChartOptions.get(currentChartRow));
+                pieChartData = kitchenPieChartDataSetValues(createPieData(kitchenOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+        }
+    }
+
+    private void switchOne(){
+        switch (currentChartRow){
+            case 0:{
+                setLineChartVisible();
+                mainLineChart.setTitle(flatsChartOptions.get(currentChartRow));
+
+                squareLineChartSetValues();
+
+                break;
+            }
+            case 1:{
+                setLineChartVisible();
+                mainLineChart.setTitle(flatsChartOptions.get(currentChartRow));
+
+                chamberCountLineChartSetValues();
+
+                break;
+            }
+            case 2:{
+                setBarChartVisible();
+                mainBarChart.setTitle(flatsChartOptions.get(currentChartRow));
+
+                phoneBarChartSetValues();
+
+                break;
+            }
+            case 3:{
+                setBarChartVisible();
+                mainBarChart.setTitle(flatsChartOptions.get(currentChartRow));
+
+                tvBarChartSetValues();
+
+                break;
+            }
+            case 4:{
+                setBarChartVisible();
+                mainBarChart.setTitle(flatsChartOptions.get(currentChartRow));
+
+                radioBarChartSetValues();
+
+                break;
+            }
+        }
+    }
+
+    private void switchTwo(){
+        switch (currentChartRow){
+            case 0:{
+                setLineChartVisible();
+                mainLineChart.setTitle(householdsChartOptions.get(currentChartRow));
+
+                peopleCountLineChartSetValues();
+
+                break;
+            }
+            case 1:{
+                setLineChartVisible();
+                mainLineChart.setTitle(householdsChartOptions.get(currentChartRow));
+
+                chamberAreaLineChartSetValues();
+
+                break;
+            }
+            case 2:{
+                setBarChartVisible();
+                mainBarChart.setTitle(householdsChartOptions.get(currentChartRow));
+
+                internetBarChartSetValues();
+
+                break;
+            }
+        }
+    }
+
+    private void switchThree(){
+        switch (currentChartRow){
+            case 0:{
+                setBarChartVisible();
+                mainBarChart.setTitle(humansChartOptions.get(currentChartRow));
+
+                genderBarChartSetValues();
+
+                break;
+            }
+            case 1:{
+                setPieChartVisible();
+                pieChartData = whoIsPieChartDataSetValues(createPieData(relativesOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 2:{
+                setLineChartVisible();
+                mainLineChart.setTitle(humansChartOptions.get(currentChartRow));
+
+                ageLineChartSetValues();
+
+                break;
+            }
+            case 3:{
+                setPieChartVisible();
+                pieChartData = marriagePieChartDataSetValues(createPieData(weddingOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 4:{
+                setPieChartVisible();
+                pieChartData = citizenshipPieChartDataSetValues(createPieData(citizenshipOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 5:{
+                setBarChartVisible();
+                mainBarChart.setTitle(humansChartOptions.get(currentChartRow));
+
+                nationalityBarChartSetValues();
+
+                break;
+            }
+            case 6:{
+                setPieChartVisible();
+                pieChartData = educationPieChartDataSetValues(createPieData(educationOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 7:{
+                setBarChartVisible();
+                mainBarChart.setTitle(humansChartOptions.get(currentChartRow));
+
+                russianBarChartSetValues();
+
+                break;
+            }
+            case 8:{
+                setPieChartVisible();
+                pieChartData = positionPieChartDataSetValues(createPieData(positionOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 9:{
+                setLineChartVisible();
+                mainLineChart.setTitle(humansChartOptions.get(currentChartRow));
+
+                pregnantAgeLineChartSetValues();
+
+                break;
+            }
+            case 10:{
+                setLineChartVisible();
+                mainLineChart.setTitle(humansChartOptions.get(currentChartRow));
+
+                childCountLineChartSetValues();
+
+                break;
+            }
+        }
+    }
+
+    private void switchFour(){
+        switch (currentChartRow){
+            case 0:{
+                setPieChartVisible();
+                mainPieChart.setTitle(migratorsChartOptions.get(currentChartRow));
+                pieChartData = purposePieChartDataSetValues(createPieData(purposeOptions));
+                mainPieChart.setData(pieChartData);
+                break;
+            }
+            case 1:{
+                setLineChartVisible();
+                mainLineChart.setTitle(migratorsChartOptions.get(currentChartRow));
+                lastingLineChartSetValues();
+                break;
+            }
+        }
+    }
+
+    private void switchComboBox(int index, ComboBox<String> comboBox) {
+        switch (index){
+            case 0:{
+                comboBox.setItems(buildingsChartOptions);
+                break;
+            }
+            case 1:{
+                comboBox.setItems(flatsChartOptions);
+                break;
+            }
+            case 2:{
+                comboBox.setItems(householdsChartOptions);
+                break;
+            }
+            case 3:{
+                comboBox.setItems(humansChartOptions);
+                break;
+            }
+            case 4:{
+                comboBox.setItems(migratorsChartOptions);
+                break;
+            }
+        }
+    }
+
+    private void setLineChartVisible(){
+        mainLineChart.setVisible(true);
+        mainBarChart.setVisible(false);
+        barChartData.clear();
+        mainPieChart.setVisible(false);
+        pieChartData.clear();
+    }
+
+    private void setBarChartVisible(){
+        mainLineChart.setVisible(false);
+        lineChartData.clear();
+        mainBarChart.setVisible(true);
+        mainPieChart.setVisible(false);
+        pieChartData.clear();
+    }
+
+    private void setPieChartVisible(){
+        mainLineChart.setVisible(false);
+        lineChartData.clear();
+        mainBarChart.setVisible(false);
+        barChartData.clear();
+        mainPieChart.setVisible(true);
+    }
+
+    private void disableAllCharts(){
+        mainLineChart.setVisible(false);
+        lineChartData.clear();
+        mainBarChart.setVisible(false);
+        barChartData.clear();
+        mainPieChart.setVisible(false);
+        pieChartData.clear();
+    }
+
+    //endregion
+
+    //region LineChart
+
+    private void updateSeries(int number, ObservableList<XYChart.Data<Number, Number>> list){
+        for (XYChart.Data<Number,Number> x : list){
+            if (x.getXValue().intValue()==number){
+                x.setYValue(x.getYValue().intValue()+1);
+                return;
+            }
+        }
+        list.add(new XYChart.Data<>(number, 1));
+    }
+
+    private void updateSeries(double number, ObservableList<XYChart.Data<Number, Number>> list){
+        for (XYChart.Data<Number,Number> x : list){
+            if (x.getXValue().doubleValue()==number){
+                x.setYValue(x.getYValue().intValue()+1);
+                return;
+            }
+        }
+        list.add(new XYChart.Data<>(number, 1));
+    }
+
+    private void lastingLineChartSetValues (){
+        lineChartData.clear();
+        for (dbMigrationtableEntity x : migrations){
+            if (x.getLasting()!= null) {
+                updateSeries(x.getLasting(), lineChartData);
+            }
+        }
+    }
+
+    private void ageLineChartSetValues (){
+        lineChartData.clear();
+        for (dbHumantableEntity x : humans){
+            if (x.getBirthDate()!= null) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(x.getBirthDate());
+                updateSeries(calculateAge(LocalDate.of(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH) ), LocalDate.now()), lineChartData);
+            }
+        }
+
+    }
+
+    private void pregnantAgeLineChartSetValues (){
+        lineChartData.clear();
+        for (dbHumantableEntity x : humans){
+            if (x.getFirstChildBirthdate()!= null) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(x.getFirstChildBirthdate());
+                updateSeries(calculateAge(LocalDate.of(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH) ), LocalDate.now()), lineChartData);
+            }
+        }
+
+    }
+
+    private void childCountLineChartSetValues (){
+        lineChartData.clear();
+        for (dbHumantableEntity x : humans){
+            if (x.getChildCount()!= null) {
+                updateSeries(x.getChildCount(), lineChartData);
+            }
+        }
+
+    }
+
+    private void squareLineChartSetValues (){
+        lineChartData.clear();
+        for (dbFlattableEntity x : flats){
+            if (x.getSquare()!= null) {
+                updateSeries(x.getSquare(), lineChartData);
+            }
+        }
+
+    }
+
+    private void chamberCountLineChartSetValues (){
+        lineChartData.clear();
+        for (dbFlattableEntity x : flats){
+            if (x.getChamberCount()!= null) {
+                updateSeries(x.getChamberCount(), lineChartData);
+            }
+        }
+
+    }
+
+    private void peopleCountLineChartSetValues (){
+        lineChartData.clear();
+        for (dbHouseholdtableEntity x : households){
+            if (x.getPeopleCount()!= null) {
+                updateSeries(x.getPeopleCount(), lineChartData);
+            }
+        }
+
+    }
+
+    private void chamberAreaLineChartSetValues (){
+        lineChartData.clear();
+        for (dbHouseholdtableEntity x : households){
+            if (x.getChamberCount()!= null) {
+                updateSeries(x.getChamberCount(), lineChartData);
+            }
+        }
+
+    }
+    //endregion
+
+    //region BarChart
+
+    private void updateSeries(String string, ObservableList<XYChart.Data> list){
+        for (XYChart.Data<String,Number> x : list){
+            if (x.getXValue().equals(string)){
+                x.setYValue(x.getYValue().intValue()+1);
+                return;
+            }
+        }
+        list.add(new XYChart.Data<>(string, 1));
+    }
+
+    private void updateSeries(Boolean bool, ObservableList<XYChart.Data> list){
+        String string;
+        if (bool) {
+            string = "Да";
+        } else {
+            string = "Нет";
+        }
+        updateSeries(string, list);
+    }
+
+    private void updateGenderSeries(Boolean bool, ObservableList<XYChart.Data> list){
+        String string;
+        if (bool) {
+            string = "Муж";
+        } else {
+            string = "Жен";
+        }
+        updateSeries(string, list);
+    }
+
+    private void internetBarChartSetValues (){
+        lineChartData.clear();
+        for (dbHouseholdtableEntity x : households){
+            if (x.getInternet()!= null) {
+                updateSeries(x.getInternet(), barChartData);
+            }
+        }
+    }
+
+    private void genderBarChartSetValues (){
+        lineChartData.clear();
+        for (dbHumantableEntity x : humans){
+            if (x.getSex()!= null) {
+                updateGenderSeries(x.getSex(), barChartData);
+            }
+        }
+    }
+
+    private void nationalityBarChartSetValues (){
+        lineChartData.clear();
+        for (dbHumantableEntity x : humans){
+            if (x.getNationality()!= null) {
+                updateSeries(x.getNationality(), barChartData);
+            }
+        }
+    }
+
+    private void russianBarChartSetValues (){
+        lineChartData.clear();
+        for (dbHumantableEntity x : humans){
+            if (x.getRussian()!= null) {
+                updateSeries(x.getRussian(), barChartData);
+            }
+        }
+    }
+
+    private void phoneBarChartSetValues (){
+        lineChartData.clear();
+        for (dbFlattableEntity x : flats){
+            if (x.getPhone()!= null) {
+                updateSeries(x.getPhone(), barChartData);
+            }
+        }
+    }
+
+    private void tvBarChartSetValues (){
+        lineChartData.clear();
+        for (dbFlattableEntity x : flats){
+            if (x.getTv()!= null) {
+                updateSeries(x.getTv(), barChartData);
+            }
+        }
+    }
+
+    private void radioBarChartSetValues (){
+        lineChartData.clear();
+        for (dbFlattableEntity x : flats){
+            if (x.getRadio()!= null) {
+                updateSeries(x.getRadio(), barChartData);
+            }
+        }
+    }
+
+    //endregion
 }

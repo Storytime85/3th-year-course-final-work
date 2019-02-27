@@ -250,7 +250,7 @@ public class dbSalariestableEntity extends SalaryVariations implements Serializa
         if (index == null){
             return " ";
         } else {
-            return variations.get(index);
+            return variations.get(index-1);
         }
     }
 }

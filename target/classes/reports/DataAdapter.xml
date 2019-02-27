@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>Main Connection</name><driver>com.mysql.jdbc.Driver</driver><username>admin</username><password>admin</password><savePassword>true</savePassword><url>jdbc:mysql://localhost:3306/curse?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8</url><database></database><serverAddress></serverAddress></jdbcDataAdapter>

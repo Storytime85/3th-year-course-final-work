@@ -10,6 +10,8 @@ import persistence.abstracts.FormControllers;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class FormPController extends AddingControllers implements Initializable {
@@ -164,7 +166,13 @@ public class FormPController extends AddingControllers implements Initializable 
     private void createMigrator() {
         migrator.setHumanId(resultId);
         migrator.setSex(getBool(sexComboBox));
-        migrator.setBirthYear(new Date (Integer.parseInt(yearTextField.getText())));
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.YEAR, Integer.parseInt(yearTextField.getText()));
+        cal.set(cal.DAY_OF_MONTH, 1);
+        cal.set(cal.MONTH, 1);
+//        updateSeries(calculateAge(LocalDate.of(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),
+//                cal.get(Calendar.DAY_OF_MONTH) ), LocalDate.now()), lineChartData);
+        migrator.setBirthYear(new Date (cal.getTime().getTime()));
         migrator.setPermanentCountry(countryTextField.getText());
         migrator.setPurpose(purposeComboBox.getSelectionModel().getSelectedIndex());
         if(!writeWhichTextField.isDisabled()) {
