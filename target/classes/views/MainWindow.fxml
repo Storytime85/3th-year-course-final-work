@@ -22,6 +22,36 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainWindowController">
    <children>
+      <Pane fx:id="filterPane" layoutX="10.0" layoutY="710.0" prefHeight="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <TextField fx:id="firstFilterTextField" layoutX="400.0" layoutY="35.0" prefHeight="31.0" prefWidth="150.0" />
+            <ComboBox fx:id="tableSelectComboBox" layoutX="80.0" layoutY="35.0" onAction="#tableSelectComboBoxOnSelect" prefHeight="31.0" prefWidth="150.0" />
+            <ComboBox fx:id="rowSelectComboBox" layoutX="240.0" layoutY="35.0" onAction="#rowSelectComboBoxOnSelect" prefHeight="31.0" prefWidth="150.0" />
+            <Button fx:id="backTwoButton" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#mainPaneActivate" text="&lt;&lt;" />
+         </children>
+      </Pane>
+      <Pane fx:id="reportPane" layoutX="10.0" layoutY="710.0" prefHeight="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ComboBox fx:id="firstReportComboBox" layoutX="100.0" layoutY="15.0" prefHeight="31.0" prefWidth="150.0" />
+            <ComboBox fx:id="secondReportComboBox" layoutX="260.0" layoutY="15.0" prefHeight="31.0" prefWidth="150.0" />
+            <TextField fx:id="fileNameTextField" layoutX="175.0" layoutY="55.0" prefHeight="31.0" prefWidth="150.0" />
+            <Button fx:id="createReportButton" layoutX="430.0" layoutY="30.0" mnemonicParsing="false" onAction="#createReportButtonClick" text="Создать отчет" />
+            <Button fx:id="backTwoButton" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#mainPaneActivate" text="&lt;&lt;" />
+         </children>
+      </Pane>
+      <Pane fx:id="mainMenuPane" prefHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="newMigratorButton" layoutX="438.0" layoutY="16.0" mnemonicParsing="false" onAction="#newMigratorButtonClick" prefHeight="31.0" prefWidth="138.0" text="Добавить мигранта" />
+            <Button fx:id="newBuildingButton" layoutX="146.0" layoutY="15.0" mnemonicParsing="false" onAction="#newBuildingButtonClick" prefHeight="31.0" prefWidth="138.0" text="Добавить здание" />
+            <Button fx:id="newFlatButton" layoutX="146.0" layoutY="58.0" mnemonicParsing="false" onAction="#newFlatButtonClick" prefHeight="31.0" prefWidth="138.0" text="Добавить квартиру" />
+            <Button fx:id="newHouseholdButton" layoutX="292.0" layoutY="15.0" mnemonicParsing="false" onAction="#newHouseholdButtonClick" prefHeight="31.0" prefWidth="138.0" text="Добавить домохозяйство" />
+            <CheckBox fx:id="masterDetailCheckBox" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" onAction="#masterDetailCheckBoxClick" text="Master-Detail" />
+            <Button fx:id="renewButton" layoutX="17.0" layoutY="57.0" mnemonicParsing="false" onAction="#renewButtonClick" text="Обновить" />
+            <Button fx:id="newPersonButton" layoutX="292.0" layoutY="58.0" mnemonicParsing="false" onAction="#newHumanButtonClick" prefHeight="31.0" prefWidth="138.0" text="Добавить человека" />
+            <Button fx:id="reportsButton" layoutX="600.0" layoutY="16.0" mnemonicParsing="false" onAction="#reportPaneActivate" prefHeight="31.0" prefWidth="71.0" text="Отчеты" />
+            <Button fx:id="filtersButton" layoutX="600.0" layoutY="55.0" mnemonicParsing="false" onAction="#filterPaneActivate" prefHeight="31.0" prefWidth="71.0" text="Фильтры" />
+         </children>
+      </Pane>
       <MenuBar layoutY="-3.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
             <Menu mnemonicParsing="false" text="Информация о пользователе">
@@ -38,7 +68,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.7555110220440882" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <SplitPane prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
         <items>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -46,7 +76,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="buildingTableView" prefHeight="353.0" prefWidth="750.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <TableView fx:id="buildingTableView" prefHeight="353.0" prefWidth="750.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="homeType" prefWidth="48.0" text="Тип жилища" />
                                   <TableColumn fx:id="dateFound" prefWidth="72.0" text="Дата постройки" />
@@ -64,7 +94,7 @@
                                     <TableColumn fx:id="kitchen" prefWidth="75.0" text="Кухня" />
                                 </columns>
                               </TableView>
-                              <TableView fx:id="flatTableView" prefHeight="381.0" prefWidth="432.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="319.0">
+                              <TableView fx:id="flatTableView" maxHeight="300.0" prefHeight="300.0" prefWidth="432.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0">
                                 <columns>
                                   <TableColumn fx:id="flatType" prefWidth="75.0" text="Тип квартиры" />
                                   <TableColumn fx:id="flatSquare" prefWidth="68.0" text="Площадь" />
@@ -74,7 +104,7 @@
                                     <TableColumn fx:id="flatRadio" prefWidth="75.0" text="Радио" />
                                 </columns>
                               </TableView>
-                              <TableView fx:id="householdTableView" prefHeight="381.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="346.0">
+                              <TableView fx:id="householdTableView" prefHeight="300.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="peopleCount" prefWidth="124.0" text="Кол-во человек" />
                                     <TableColumn fx:id="chamberCount" prefWidth="67.0" text="Кол-во занимаемых комнат" />
@@ -89,7 +119,7 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="humanTableView" prefHeight="379.0" prefWidth="750.0" AnchorPane.bottomAnchor="348.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="humanTableView" prefHeight="379.0" prefWidth="750.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                     <TableColumn fx:id="humanWhoIs" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Кем является" />
                                   <TableColumn fx:id="humanSex" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Пол" />
@@ -125,7 +155,7 @@
                                     <TableColumn fx:id="humanFirstChildBirthdate" prefWidth="75.0" text="Дата рождения первенца" />
                                 </columns>
                               </TableView>
-                              <TableView fx:id="migrationTableView" layoutY="379.0" prefHeight="348.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="379.0">
+                              <TableView fx:id="migrationTableView" layoutY="379.0" prefHeight="300.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="migrationSex" prefWidth="75.0" text="Пол" />
                                   <TableColumn fx:id="migrationYear" prefWidth="75.0" text="Год рождения" />
@@ -140,14 +170,14 @@
                         </AnchorPane>
                      </content>
                 </Tab>
-                  <Tab text="Отчеты">
+                  <Tab text="Графики">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <PieChart fx:id="mainPieChart" layoutX="27.0" layoutY="320.0" prefHeight="352.0" prefWidth="408.0" />
-                              <ComboBox fx:id="thirdChartComboBox" layoutX="481.0" layoutY="339.0" onAction="#thirdChartComboBoxOnSelect" prefWidth="150.0" />
-                              <ComboBox fx:id="fourthChartComboBox" layoutX="481.0" layoutY="384.0" onAction="#fourthChartComboBoxOnSelect" prefWidth="150.0" />
-                              <BarChart fx:id="mainBarChart" layoutX="14.0" layoutY="14.0" prefHeight="306.0" prefWidth="461.0" title="Temp">
+                              <PieChart fx:id="mainPieChart" layoutX="200.0" layoutY="10.0" prefHeight="600.0" prefWidth="600.0" visible="false" />
+                              <ComboBox fx:id="thirdChartComboBox" layoutX="10.0" layoutY="10.0" onAction="#thirdChartComboBoxOnSelect" prefWidth="150.0" />
+                              <ComboBox fx:id="fourthChartComboBox" layoutX="10.0" layoutY="50.0" onAction="#fourthChartComboBoxOnSelect" prefWidth="150.0" />
+                              <BarChart fx:id="mainBarChart" layoutX="200.0" layoutY="10.0" prefHeight="600.0" prefWidth="600.0" title="Temp" visible="false">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
@@ -155,7 +185,7 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </BarChart>
-                              <LineChart fx:id="mainLineChart" layoutX="150.0" layoutY="14.0" prefHeight="241.0" prefWidth="299.0" title="Temp">
+                              <LineChart fx:id="mainLineChart" layoutX="200.0" layoutY="10.0" prefHeight="600.0" prefWidth="600.0" title="Temp" visible="false">
                                 <xAxis>
                                   <NumberAxis side="BOTTOM" />
                                 </xAxis>
@@ -163,34 +193,13 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Button fx:id="clearButton" layoutX="532.0" layoutY="277.0" mnemonicParsing="false" onAction="#clearButtonOnClick" text="Очистить" />
+                              <Button fx:id="clearButton" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#clearButtonOnClick" text="Очистить" />
                            </children>
                         </AnchorPane>
                     </content>
                   </Tab>
               </tabs>
             </TabPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Pane maxWidth="240.0" minWidth="240.0" prefWidth="240.0">
-                     <children>
-                        <Button fx:id="newMigratorButton" layoutX="13.0" layoutY="356.0" mnemonicParsing="false" onAction="#newMigratorButtonClick" text="Добавить мигранта" />
-                        <Button fx:id="newBuildingButton" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" onAction="#newBuildingButtonClick" text="Добавить здание" />
-                        <Button fx:id="newFlatButton" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" onAction="#newFlatButtonClick" text="Добавить квартиру" />
-                        <Button fx:id="newHouseholdButton" layoutX="13.0" layoutY="243.0" mnemonicParsing="false" onAction="#newHouseholdButtonClick" text="Добавить домохозяйство" />
-                        <CheckBox fx:id="masterDetailCheckBox" layoutX="17.0" layoutY="20.0" mnemonicParsing="false" onAction="#masterDetailCheckBoxClick" text="Режим Master-Detail" />
-                        <Button fx:id="renewButton" layoutX="37.0" layoutY="59.0" mnemonicParsing="false" onAction="#renewButtonClick" text="Обновить" />
-                        <Button fx:id="newPersonButton" layoutX="13.0" layoutY="300.0" mnemonicParsing="false" onAction="#newHumanButtonClick" text="Добавить человека" />
-                        <ComboBox fx:id="tableSelectComboBox" layoutX="6.0" layoutY="418.0" onAction="#tableSelectComboBoxOnSelect" prefWidth="150.0" />
-                        <ComboBox fx:id="rowSelectComboBox" layoutY="462.0" onAction="#rowSelectComboBoxOnSelect" prefWidth="150.0" />
-                        <TextField fx:id="firstFilterTextField" disable="true" layoutX="8.0" layoutY="503.0" prefWidth="120.0" />
-                     </children>
-                  </Pane>
-                  <Button fx:id="createReportButton" layoutX="46.0" layoutY="682.0" mnemonicParsing="false" onAction="#createReportButtonClick" text="Создать отчет" />
-                  <ComboBox fx:id="firstReportComboBox" layoutX="14.0" layoutY="534.0" prefWidth="150.0" />
-                  <ComboBox fx:id="secondReportComboBox" layoutX="14.0" layoutY="582.0" prefWidth="150.0" />
-               </children>
-            </AnchorPane>
         </items>
       </SplitPane>
    </children>

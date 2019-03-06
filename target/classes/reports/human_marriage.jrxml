@@ -96,33 +96,18 @@ ON main.Citizenship = c.Citizenship]]>
 	</background>
 	<title>
 		<band height="136" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="164" height="126" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
-				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement style="Title" x="170" y="0" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
+				<reportElement style="Title" x="50" y="0" width="480" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Coffee Title]]></text>
+				<text><![CDATA[Брак и гражданство]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="219" y="62" width="196" height="22" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
+				<reportElement style="SubTitle" x="92" y="70" width="382" height="48" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
 				<textElement>
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee SubTitle]]></text>
+				<text><![CDATA[Данные о состоянии в браке, национальной и гражданской принадлежности]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="172" y="94" width="383" height="42" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
-				<textElement textAlignment="Right">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
-			</staticText>
-			<image>
-				<reportElement x="433" y="-115" width="267" height="209" uuid="5d64e5b3-07bb-48ab-89dc-15c0c46bb19a"/>
-				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -137,40 +122,40 @@ ON main.Citizenship = c.Citizenship]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="92" height="15" forecolor="#736343" uuid="889b97ce-c3f9-4bf5-88a6-d546a2a9c094">
+				<reportElement style="Column header" x="0" y="0" width="110" height="15" forecolor="#736343" uuid="889b97ce-c3f9-4bf5-88a6-d546a2a9c094">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="018d1167-55ce-40b7-b000-fe10e4bff67a"/>
 				</reportElement>
-				<text><![CDATA[Sex]]></text>
+				<text><![CDATA[Кем являетесь?]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="92" y="0" width="92" height="15" forecolor="#736343" uuid="1f713ed4-52ec-4524-914e-3dccaee0c86c">
+				<reportElement style="Column header" x="114" y="0" width="68" height="15" forecolor="#736343" uuid="1f713ed4-52ec-4524-914e-3dccaee0c86c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d86c37ce-d967-4bbc-a454-5381f9eba3e8"/>
 				</reportElement>
-				<text><![CDATA[BirthDate]]></text>
+				<text><![CDATA[Пол]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="184" y="0" width="92" height="15" forecolor="#736343" uuid="f4c0b833-f6eb-4915-8769-d511146f1f6d">
+				<reportElement style="Column header" x="184" y="0" width="66" height="15" forecolor="#736343" uuid="f4c0b833-f6eb-4915-8769-d511146f1f6d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="996a6a60-b29b-486e-832e-2fc0797d9eff"/>
 				</reportElement>
-				<text><![CDATA[BirthPlace]]></text>
+				<text><![CDATA[Дата рождения]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="276" y="0" width="92" height="15" forecolor="#736343" uuid="72c7088a-95f1-41e7-a954-516139fd235a">
+				<reportElement style="Column header" x="250" y="1" width="100" height="15" forecolor="#736343" uuid="72c7088a-95f1-41e7-a954-516139fd235a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58685149-755a-4afe-af9b-ad41cddc2b8b"/>
 				</reportElement>
-				<text><![CDATA[Nationality]]></text>
+				<text><![CDATA[Место рождения]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="368" y="0" width="92" height="15" forecolor="#736343" uuid="78c9350d-7a0a-4fac-b7ac-2cc21752bc9b">
+				<reportElement style="Column header" x="350" y="0" width="100" height="15" forecolor="#736343" uuid="78c9350d-7a0a-4fac-b7ac-2cc21752bc9b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c71e40a-82bd-4a94-9caa-7e90da322023"/>
 				</reportElement>
-				<text><![CDATA[Description]]></text>
+				<text><![CDATA[Национальность]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="460" y="0" width="92" height="15" forecolor="#736343" uuid="4df1dffa-6174-4d58-a040-196aec892e11">
+				<reportElement style="Column header" x="453" y="1" width="102" height="15" forecolor="#736343" uuid="4df1dffa-6174-4d58-a040-196aec892e11">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1fec8b68-0364-4da2-b820-3f56ef9cfdaf"/>
 				</reportElement>
-				<text><![CDATA[COLUMN_9]]></text>
+				<text><![CDATA[Гражданство]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -179,37 +164,37 @@ ON main.Citizenship = c.Citizenship]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766"/>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="90" y="0" width="92" height="15" uuid="6585cac7-26c1-4aa2-8552-fcbf1c49fe83">
+					<reportElement style="Detail" x="114" y="0" width="68" height="15" uuid="6585cac7-26c1-4aa2-8552-fcbf1c49fe83">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="018d1167-55ce-40b7-b000-fe10e4bff67a"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{Sex}, "Мужской", "Женский")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="184" y="0" width="92" height="15" uuid="6ca06fab-2fa0-4bf3-ad30-f97fc6ac1cc1">
+					<reportElement style="Detail" x="184" y="0" width="66" height="15" uuid="6ca06fab-2fa0-4bf3-ad30-f97fc6ac1cc1">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d86c37ce-d967-4bbc-a454-5381f9eba3e8"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[DATEFORMAT($F{BirthDate},"dd.MM.yyyy")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="276" y="0" width="92" height="15" uuid="34d9cc88-5f95-4f93-9b7c-df670ad6a458">
+					<reportElement style="Detail" x="250" y="0" width="100" height="15" uuid="34d9cc88-5f95-4f93-9b7c-df670ad6a458">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="996a6a60-b29b-486e-832e-2fc0797d9eff"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{BirthPlace}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="370" y="0" width="92" height="15" uuid="da1a3b97-be27-4e99-95e9-11510ff39625">
+					<reportElement style="Detail" x="350" y="0" width="103" height="15" uuid="da1a3b97-be27-4e99-95e9-11510ff39625">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58685149-755a-4afe-af9b-ad41cddc2b8b"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{Nationality}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="-2" y="0" width="92" height="15" uuid="521bbb54-3e4d-458e-9208-9167a08c2a51">
+					<reportElement style="Detail" x="-2" y="0" width="116" height="15" uuid="521bbb54-3e4d-458e-9208-9167a08c2a51">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c71e40a-82bd-4a94-9caa-7e90da322023"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{Description}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="460" y="0" width="92" height="15" uuid="0d523077-f2b1-4382-888b-26efffb8ae35">
+					<reportElement style="Detail" x="453" y="0" width="99" height="15" uuid="0d523077-f2b1-4382-888b-26efffb8ae35">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1fec8b68-0364-4da2-b820-3f56ef9cfdaf"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{COLUMN_9}.equals("Двойное"),

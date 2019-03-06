@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="human_salaries" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Coffee" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\main\resources\reports\DataAdapter.xml"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
@@ -47,16 +47,16 @@ ON main.WhyNotLooking = b.WhyNotLooking]]>
 		<property name="com.jaspersoft.studio.field.label" value="WorkNear"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="humantable"/>
 	</field>
-	<field name="WorkInRF" class="java.lang.Boolean">
-		<property name="com.jaspersoft.studio.field.label" value="WorkNear"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="humantable"/>
-	</field>
 	<field name="WorkNotRf" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="WorkNotRf"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="humantable"/>
 	</field>
+	<field name="WorkInRF" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="WorkInRF"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="humantable"/>
+	</field>
 	<field name="LookingForJob" class="java.lang.Boolean">
-		<property name="com.jaspersoft.studio.field.label" value="SecondJob"/>
+		<property name="com.jaspersoft.studio.field.label" value="LookingForJob"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="humantable"/>
 	</field>
 	<field name="SecondJob" class="java.lang.Boolean">
@@ -69,9 +69,9 @@ ON main.WhyNotLooking = b.WhyNotLooking]]>
 	</field>
 	<field name="Description" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="Description"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="position"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pose"/>
 	</field>
-	<field name="COLUMN_10" class="java.lang.String">
+	<field name="COLUMN_12" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="Description"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="whynotlooking"/>
 	</field>
@@ -107,33 +107,18 @@ ON main.WhyNotLooking = b.WhyNotLooking]]>
 	</background>
 	<title>
 		<band height="136" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="164" height="126" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
-				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement style="Title" x="170" y="0" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Coffee Title]]></text>
+				<text><![CDATA[Работа]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="219" y="62" width="196" height="22" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
+				<reportElement style="SubTitle" x="140" y="62" width="251" height="48" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
 				<textElement>
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee SubTitle]]></text>
+				<text><![CDATA[Данные о статусе работы у трудоспособного населения]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="172" y="94" width="383" height="42" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
-				<textElement textAlignment="Right">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
-			</staticText>
-			<image>
-				<reportElement x="433" y="-115" width="267" height="209" uuid="5d64e5b3-07bb-48ab-89dc-15c0c46bb19a"/>
-				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -148,46 +133,40 @@ ON main.WhyNotLooking = b.WhyNotLooking]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="61" height="15" forecolor="#736343" uuid="70a63097-c175-4ffb-b48c-626a2fcacb66">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="83dfe0fe-2d7a-4e7a-8110-cb04b9e28663"/>
+				<reportElement style="Column header" x="0" y="0" width="60" height="15" forecolor="#736343" uuid="f6e6d30f-747b-42c1-83d1-cedb5fa63361">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef5efdc5-13c7-4eb3-8a7a-756ed3b02e8c"/>
 				</reportElement>
-				<text><![CDATA[Sex]]></text>
+				<text><![CDATA[Пол]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="61" y="0" width="61" height="15" forecolor="#736343" uuid="1b2b1d2c-89a8-455e-874e-fdec6a7372e6">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="72257c25-ae86-4ffe-840e-2cd5150d9c70"/>
+				<reportElement style="Column header" x="60" y="0" width="100" height="15" forecolor="#736343" uuid="e59910f3-7839-4468-9454-0d64136afa4f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9edc7b48-650f-4574-b306-0a72fd53f048"/>
 				</reportElement>
-				<text><![CDATA[BirthDate]]></text>
+				<text><![CDATA[Дата рождения]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="122" y="0" width="61" height="15" forecolor="#736343" uuid="ba8abe09-2bb8-450d-9fc7-2e22c6b397e7">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5aa78e51-7901-4239-9e44-319bf3ba9fe0"/>
+				<reportElement style="Column header" x="160" y="0" width="100" height="15" forecolor="#736343" uuid="359dbd60-596e-4ef7-a54f-ed59ca05d429">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48e426fe-ffc6-43cb-828b-506ae1dc4af9"/>
 				</reportElement>
-				<text><![CDATA[BirthPlace]]></text>
+				<text><![CDATA[Место рождения]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="183" y="0" width="61" height="15" forecolor="#736343" uuid="f051db28-829d-4771-aa21-0258d2321404">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="72b08519-f343-473d-a157-a3fa23725f46"/>
+				<reportElement style="Column header" x="260" y="0" width="110" height="15" forecolor="#736343" uuid="ab8adb09-032d-47f3-a5b6-ee73a10607e8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="83bcc72d-5592-4ce6-bb89-07c775bd31ec"/>
 				</reportElement>
-				<text><![CDATA[WorkNear]]></text>
+				<text><![CDATA[Где находилась работа]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="247" y="0" width="61" height="15" forecolor="#736343" uuid="cb5428e5-6f26-45b3-b4a5-b2e9a51fbf61">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1089bc00-f647-4f32-82d7-89388ba09f46"/>
+				<reportElement style="Column header" x="370" y="1" width="80" height="15" forecolor="#736343" uuid="e26e5d7e-ffc6-4b01-83bf-78956418837a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="041ce9ea-e9f1-4607-96fd-3a2d5f77f0e9"/>
 				</reportElement>
-				<text><![CDATA[SecondJob]]></text>
+				<text><![CDATA[Вторая работа]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="308" y="0" width="61" height="15" forecolor="#736343" uuid="77edaea4-d11c-4ae2-9095-bc3572ac778f">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1dc8f145-d482-47a6-b01b-290953897060"/>
+				<reportElement style="Column header" x="450" y="1" width="105" height="15" forecolor="#736343" uuid="cc12ba97-ea0e-4c8d-bf07-72950786935a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="768dee8f-0587-44f5-91a0-ef0e7d82f047"/>
 				</reportElement>
-				<text><![CDATA[Near2Weeks]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="488" y="0" width="61" height="15" forecolor="#736343" uuid="fe363c24-7a61-4390-83ce-bca5256ee747">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5e63893a-d38a-4656-acd7-bf718cf9508a"/>
-				</reportElement>
-				<text><![CDATA[COLUMN_10]]></text>
+				<text><![CDATA[Искали работу?]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -196,26 +175,26 @@ ON main.WhyNotLooking = b.WhyNotLooking]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766"/>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="0" y="0" width="61" height="15" uuid="96578161-9864-491f-bd8a-50b1634bb96b">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="83dfe0fe-2d7a-4e7a-8110-cb04b9e28663"/>
+					<reportElement style="Detail" x="0" y="0" width="60" height="15" uuid="9ab6d7f3-ece4-4bfb-a394-62e7e3f446e9">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef5efdc5-13c7-4eb3-8a7a-756ed3b02e8c"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{Sex},"Мужской","Женский")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="61" y="0" width="61" height="15" uuid="2f076ae0-8966-4d84-9637-d392a4f2a29e">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="72257c25-ae86-4ffe-840e-2cd5150d9c70"/>
+					<reportElement style="Detail" x="60" y="0" width="100" height="15" uuid="64727f98-f043-4ffb-8ea2-3c02078e92fb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9edc7b48-650f-4574-b306-0a72fd53f048"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[DATEFORMAT($F{BirthDate},"dd.MM.yyyy")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="122" y="0" width="61" height="15" uuid="a60fc122-7701-4e42-9dfc-18b8b9577e97">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5aa78e51-7901-4239-9e44-319bf3ba9fe0"/>
+					<reportElement style="Detail" x="160" y="0" width="100" height="15" uuid="4c16b352-cf21-4521-9af6-25626b50d95e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48e426fe-ffc6-43cb-828b-506ae1dc4af9"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{BirthPlace}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="183" y="0" width="61" height="15" uuid="fbcd0b28-cd20-4172-a915-70b65a3b0497">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="72b08519-f343-473d-a157-a3fa23725f46"/>
+					<reportElement style="Detail" x="260" y="0" width="110" height="15" uuid="d0e0aa33-88f0-4586-88bd-e7f2c3f75e19">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="83bcc72d-5592-4ce6-bb89-07c775bd31ec"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{WorkNear},"Тот же нас. пункт",IF($F{WorkInRF},
 		"Иной нас. пункт в РФ",
@@ -223,28 +202,22 @@ ON main.WhyNotLooking = b.WhyNotLooking]]>
 	))]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="247" y="0" width="61" height="15" uuid="8f25065d-a018-45b4-92f2-ab931d2ca8cf">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1089bc00-f647-4f32-82d7-89388ba09f46"/>
+					<reportElement style="Detail" x="370" y="0" width="80" height="15" uuid="21d980f6-2c3f-4de7-8a82-15a43d75e8ff">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="041ce9ea-e9f1-4607-96fd-3a2d5f77f0e9"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{SecondJob},"Да","Нет")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="300" y="0" width="61" height="15" uuid="7b2c017d-f96c-4f31-90c0-5b6bb515721c">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1dc8f145-d482-47a6-b01b-290953897060"/>
+					<reportElement style="Detail" x="450" y="0" width="105" height="15" uuid="732642e0-bcd0-4f65-8bd7-2d5d6cecaa09">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="768dee8f-0587-44f5-91a0-ef0e7d82f047"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{LookingForJob},
 	IF($F{Near2Weeks},
 		"Не искал(а), но приступил(а) бы",
 		"Не искал(а), не приступил(а) бы"
 	),
-	"Нет ," + $F{COLUMN_10}
+	"Нет, " + $F{COLUMN_12}
 )]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="488" y="0" width="61" height="15" uuid="10853dbc-f178-4b6b-ac83-3236c1c9eaa6">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5e63893a-d38a-4656-acd7-bf718cf9508a"/>
-					</reportElement>
-					<textFieldExpression><![CDATA[$F{COLUMN_10}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

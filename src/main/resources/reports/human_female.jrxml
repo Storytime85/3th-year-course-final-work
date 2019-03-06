@@ -41,33 +41,18 @@ WHERE main.Sex = false]]>
 	</background>
 	<title>
 		<band height="136" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="164" height="126" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1"/>
-				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement style="Title" x="170" y="0" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
+				<reportElement style="Title" x="100" y="0" width="330" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Coffee Title]]></text>
+				<text><![CDATA[Беременности]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="219" y="62" width="196" height="22" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
+				<reportElement style="SubTitle" x="120" y="62" width="280" height="48" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
 				<textElement>
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee SubTitle]]></text>
+				<text><![CDATA[Данные о женщинах, количестве их беременностей и первом ребенке]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="172" y="94" width="383" height="42" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f"/>
-				<textElement textAlignment="Right">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
-			</staticText>
-			<image>
-				<reportElement x="433" y="-115" width="267" height="209" uuid="5d64e5b3-07bb-48ab-89dc-15c0c46bb19a"/>
-				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -82,28 +67,28 @@ WHERE main.Sex = false]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="138" height="15" forecolor="#736343" uuid="4df335b9-ee31-4df1-b9d3-02869cd6c79d">
+				<reportElement style="Column header" x="0" y="0" width="100" height="15" forecolor="#736343" uuid="4df335b9-ee31-4df1-b9d3-02869cd6c79d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cd9c95de-cc93-45ff-b5d6-dd748b8cc0ab"/>
 				</reportElement>
-				<text><![CDATA[BirthDate]]></text>
+				<text><![CDATA[Дата рождения]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="138" y="0" width="138" height="15" forecolor="#736343" uuid="626e2a87-0ab6-42e3-ad8b-d4a81592dd33">
+				<reportElement style="Column header" x="100" y="1" width="176" height="15" forecolor="#736343" uuid="626e2a87-0ab6-42e3-ad8b-d4a81592dd33">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5129d5b-b90d-4727-95d3-a2fc1568e3fa"/>
 				</reportElement>
-				<text><![CDATA[BirthPlace]]></text>
+				<text><![CDATA[Место рождения]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="276" y="0" width="138" height="15" forecolor="#736343" uuid="041761e6-8bd5-4c05-8e6e-2ea037ad7083">
+				<reportElement style="Column header" x="276" y="0" width="84" height="15" forecolor="#736343" uuid="041761e6-8bd5-4c05-8e6e-2ea037ad7083">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d581218-cbcf-4b32-b502-e2b86ddaf7a2"/>
 				</reportElement>
-				<text><![CDATA[ChildCount]]></text>
+				<text><![CDATA[Кол-во детей]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="414" y="0" width="138" height="15" forecolor="#736343" uuid="5c72c9cc-ba9f-4880-b0b5-60f23e927e8d">
+				<reportElement style="Column header" x="360" y="1" width="192" height="15" forecolor="#736343" uuid="5c72c9cc-ba9f-4880-b0b5-60f23e927e8d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b15faf44-6a91-44ea-bf5b-a1ad28fa6a10"/>
 				</reportElement>
-				<text><![CDATA[FirstChildBirthdate]]></text>
+				<text><![CDATA[Дата рождения первого ребенка]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -112,27 +97,31 @@ WHERE main.Sex = false]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766"/>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="0" y="0" width="138" height="15" uuid="30ff1e60-33fa-4dcd-8461-2580d0e1931b">
+					<reportElement style="Detail" x="0" y="0" width="100" height="15" uuid="30ff1e60-33fa-4dcd-8461-2580d0e1931b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cd9c95de-cc93-45ff-b5d6-dd748b8cc0ab"/>
 					</reportElement>
+					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[DATEFORMAT($F{BirthDate}, "dd.MM.yyy")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="138" y="0" width="138" height="15" uuid="b9a45582-fda7-40a5-b5be-5918d75e14a1">
+					<reportElement style="Detail" x="100" y="0" width="176" height="15" uuid="b9a45582-fda7-40a5-b5be-5918d75e14a1">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5129d5b-b90d-4727-95d3-a2fc1568e3fa"/>
 					</reportElement>
+					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA[$F{BirthPlace}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="276" y="0" width="138" height="15" uuid="ab08c9d3-7666-4f58-8da5-3221017a08b8">
+					<reportElement style="Detail" x="276" y="0" width="84" height="15" uuid="ab08c9d3-7666-4f58-8da5-3221017a08b8">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d581218-cbcf-4b32-b502-e2b86ddaf7a2"/>
 					</reportElement>
+					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{ChildCount}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="414" y="0" width="138" height="15" uuid="54a114f2-6fd9-408d-b373-462f1ebf7fc1">
+					<reportElement style="Detail" x="360" y="0" width="192" height="15" uuid="54a114f2-6fd9-408d-b373-462f1ebf7fc1">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b15faf44-6a91-44ea-bf5b-a1ad28fa6a10"/>
 					</reportElement>
+					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA[DATEFORMAT($F{FirstChildBirthdate}, "MM.yyy")]]></textFieldExpression>
 				</textField>
 			</frame>

@@ -48,8 +48,7 @@ LEFT JOIN kitchen m
 ON main.Kitchen=m.Kitchen
 WHERE main.HomeType=0
 OR main.HomeType=1
-OR main.HomeType=2
-OR main.HomeType=3]]>
+OR main.HomeType=2]]>
 	</queryString>
 	<field name="Description" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="Description"/>
@@ -125,7 +124,7 @@ OR main.HomeType=3]]>
 						<textElement>
 							<font isBold="true"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{Description}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[IF($F{Description}.equals("Дом частного жилфонда") || $F{Description}.equals("Дом госфонда") || $F{Description}.equals("Многоквартирный дом") ,$F{Description}, "")]]></textFieldExpression>
 					</textField>
 				</frame>
 			</band>
@@ -167,33 +166,18 @@ OR main.HomeType=3]]>
 	</background>
 	<title>
 		<band height="136" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="164" height="126" uuid="1c003177-754c-448f-8ce1-16868856f545"/>
-				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement style="Title" x="270" y="0" width="263" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Coffee Title]]></text>
+				<text><![CDATA[Дома]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="303" y="62" width="196" height="22" uuid="f6a78448-8260-4445-a9e0-e3fb53b080d9"/>
+				<reportElement style="SubTitle" x="200" y="60" width="283" height="68" uuid="f6a78448-8260-4445-a9e0-e3fb53b080d9"/>
 				<textElement>
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee SubTitle]]></text>
+				<text><![CDATA[Данные о домах и имеющихся в них удобствах]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="172" y="94" width="383" height="42" uuid="8240065e-64b6-4170-b5d9-6341598e7b35"/>
-				<textElement textAlignment="Right">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor purus gravida arcu aliquam mattis. Donec et nulla libero, ut varius massa. Nulla sed turpis elit. Etiam aliquet mauris a ligula hendrerit in auctor leo lobortis.]]></text>
-			</staticText>
-			<image>
-				<reportElement x="633" y="-73" width="219" height="209" uuid="4aa6f4d1-27dc-4b34-9227-59e19ce2c959"/>
-				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -208,70 +192,70 @@ OR main.HomeType=3]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="72" height="15" forecolor="#736343" uuid="28a6aa51-6288-4df7-9f6c-45391975ee61">
+				<reportElement style="Column header" x="0" y="0" width="36" height="15" forecolor="#736343" uuid="28a6aa51-6288-4df7-9f6c-45391975ee61">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e23349bd-78e5-4e3d-96ef-ac6b3b8d1131"/>
 				</reportElement>
-				<text><![CDATA[Energy]]></text>
+				<text><![CDATA[Эл-во]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="72" y="0" width="72" height="15" forecolor="#736343" uuid="9111f888-dcff-40fb-98cf-7ed84f344137">
+				<reportElement style="Column header" x="36" y="1" width="60" height="15" forecolor="#736343" uuid="9111f888-dcff-40fb-98cf-7ed84f344137">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b61fe0a5-fadf-4f1c-9efb-66f2a9e38a38"/>
 				</reportElement>
-				<text><![CDATA[Stove]]></text>
+				<text><![CDATA[Эл. плита]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="144" y="0" width="72" height="15" forecolor="#736343" uuid="ffeb1de1-a0f8-4b0a-8497-42492c2e2772">
+				<reportElement style="Column header" x="96" y="1" width="72" height="15" forecolor="#736343" uuid="ffeb1de1-a0f8-4b0a-8497-42492c2e2772">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0169d6c5-5edc-4841-aea7-354d136700bc"/>
 				</reportElement>
-				<text><![CDATA[Gas]]></text>
+				<text><![CDATA[Газ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="216" y="0" width="72" height="15" forecolor="#736343" uuid="a3b33b66-4f4b-488c-9d1d-938e6a5f79f0">
+				<reportElement style="Column header" x="168" y="0" width="92" height="15" forecolor="#736343" uuid="a3b33b66-4f4b-488c-9d1d-938e6a5f79f0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c49adb22-d224-434a-b16c-f4f022d4dd77"/>
 				</reportElement>
-				<text><![CDATA[Heat]]></text>
+				<text><![CDATA[Отопление]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="288" y="0" width="72" height="15" forecolor="#736343" uuid="c64144ba-2b1c-48d8-b60b-6920edeaf594">
+				<reportElement style="Column header" x="260" y="0" width="72" height="15" forecolor="#736343" uuid="c64144ba-2b1c-48d8-b60b-6920edeaf594">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcaef134-93cf-4106-8ab9-b024b6aac038"/>
 				</reportElement>
-				<text><![CDATA[Water]]></text>
+				<text><![CDATA[Хол. вода]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="360" y="0" width="72" height="15" forecolor="#736343" uuid="6613ca34-be0b-453d-9e16-198c42e020f7">
+				<reportElement style="Column header" x="332" y="1" width="78" height="15" forecolor="#736343" uuid="6613ca34-be0b-453d-9e16-198c42e020f7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0a836014-cce5-482a-972a-15484b9bbeaa"/>
 				</reportElement>
-				<text><![CDATA[HotWater]]></text>
+				<text><![CDATA[Гор. вода]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="432" y="0" width="72" height="15" forecolor="#736343" uuid="2c59b988-9c0a-4a54-b8b0-f29d9815c32e">
+				<reportElement style="Column header" x="410" y="0" width="89" height="15" forecolor="#736343" uuid="2c59b988-9c0a-4a54-b8b0-f29d9815c32e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c9b72bf2-f38a-4061-afec-7459235a3d63"/>
 				</reportElement>
-				<text><![CDATA[Canalisation]]></text>
+				<text><![CDATA[Канализация]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="504" y="0" width="72" height="15" forecolor="#736343" uuid="b9b7b2ce-a6ff-4f40-85d0-c70a17d578fc">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42b7f092-c8ec-4816-8be2-dab7acd2cf39"/>
 				</reportElement>
-				<text><![CDATA[Closet]]></text>
+				<text><![CDATA[Туалет]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="576" y="0" width="72" height="15" forecolor="#736343" uuid="b0363918-ca68-48be-bd44-f7f932ad5c5e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c0749499-64e6-4b62-856a-0a3820112c4f"/>
 				</reportElement>
-				<text><![CDATA[Shower]]></text>
+				<text><![CDATA[Душ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="648" y="0" width="72" height="15" forecolor="#736343" uuid="3e089239-dc3d-43aa-b721-91bb22d3b928">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c85acdd9-04ec-4243-a487-3e2790cd67b3"/>
 				</reportElement>
-				<text><![CDATA[Garbage]]></text>
+				<text><![CDATA[Мусор]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="720" y="0" width="72" height="15" forecolor="#736343" uuid="5d2a2675-16ff-4374-90f4-f5ae85194581">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="950ae659-f783-4cb5-b8c4-61d618d42455"/>
 				</reportElement>
-				<text><![CDATA[Kitchen]]></text>
+				<text><![CDATA[Кухня]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -280,43 +264,43 @@ OR main.HomeType=3]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="fa7cec56-4ec1-48e6-a26e-7266a995d174"/>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="0" y="0" width="72" height="15" uuid="73a0d4d1-139e-4d16-9e53-10b86e811729">
+					<reportElement style="Detail" x="0" y="0" width="36" height="15" uuid="73a0d4d1-139e-4d16-9e53-10b86e811729">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e23349bd-78e5-4e3d-96ef-ac6b3b8d1131"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{Energy},"Да","Нет")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="72" y="0" width="72" height="15" uuid="e966abcc-112c-49b6-ac28-fd95442aeb14">
+					<reportElement style="Detail" x="36" y="0" width="60" height="15" uuid="e966abcc-112c-49b6-ac28-fd95442aeb14">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b61fe0a5-fadf-4f1c-9efb-66f2a9e38a38"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[IF($F{Stove},"Да","Нет")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="144" y="0" width="72" height="15" uuid="8f6ff576-0b33-4fd4-9161-b1f1533b2257">
+					<reportElement style="Detail" x="96" y="0" width="72" height="15" uuid="8f6ff576-0b33-4fd4-9161-b1f1533b2257">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0169d6c5-5edc-4841-aea7-354d136700bc"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{COLUMN_6}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="216" y="0" width="72" height="15" uuid="b7623677-e28a-4c4c-9b62-c9245597d0d9">
+					<reportElement style="Detail" x="170" y="0" width="90" height="15" uuid="b7623677-e28a-4c4c-9b62-c9245597d0d9">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c49adb22-d224-434a-b16c-f4f022d4dd77"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{COLUMN_7}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="288" y="0" width="72" height="15" uuid="b98fe0a9-e029-4635-8809-1617ba0e4e12">
+					<reportElement style="Detail" x="260" y="0" width="72" height="15" uuid="b98fe0a9-e029-4635-8809-1617ba0e4e12">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcaef134-93cf-4106-8ab9-b024b6aac038"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{COLUMN_8}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="360" y="0" width="72" height="15" uuid="b191f9f7-c049-4d91-a6f1-ff92aa55ba5c">
+					<reportElement style="Detail" x="332" y="0" width="78" height="15" uuid="b191f9f7-c049-4d91-a6f1-ff92aa55ba5c">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0a836014-cce5-482a-972a-15484b9bbeaa"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{COLUMN_9}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="Detail" x="432" y="0" width="72" height="15" uuid="bcecfcd1-d4b9-4c8a-8276-f70abee12b49">
+					<reportElement style="Detail" x="410" y="0" width="89" height="15" uuid="bcecfcd1-d4b9-4c8a-8276-f70abee12b49">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c9b72bf2-f38a-4061-afec-7459235a3d63"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{COLUMN_10}]]></textFieldExpression>

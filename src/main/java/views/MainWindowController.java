@@ -12,18 +12,32 @@ import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.HtmlExporter;
+import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRXmlExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.export.*;
+import net.sf.jasperreports.view.JasperViewer;
 import persistence.abstracts.AddingControllers;
 import persistence.abstracts.FormControllers;
 import reports.ReportTemplate;
 import tableviews.*;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -62,6 +76,22 @@ public class MainWindowController extends FormControllers implements Initializab
     //endregion
 
     //region FXML items
+    @FXML
+    private Button reportsButton;
+    @FXML
+    private Button filtersButton;
+    @FXML
+    private Button backOneButton;
+    @FXML
+    private Button backTwoButton;
+    @FXML
+    private Pane mainMenuPane;
+    @FXML
+    private Pane reportPane;
+    @FXML
+    private Pane filterPane;
+    @FXML
+    private TextField fileNameTextField;
     @FXML
     private Button createReportButton;
     @FXML
@@ -449,14 +479,168 @@ public class MainWindowController extends FormControllers implements Initializab
         secondReportComboBox.setItems(reportNameOptions);
     }
     //endregion
+    private Connection getMySQLConnection() throws SQLException, ClassNotFoundException {
 
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String connectionURL = "jdbc:mysql://localhost:3306/curse?useUnicode=true&useJDBCCompliantTimezoneShift=true&" +
+                "useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=UTF-8";
+
+        return DriverManager.getConnection(connectionURL, "admin", "admin");
+    }
     //region FXML Methods
+    @FXML
+    private void mainPaneActivate(){
+        mainMenuPane.setVisible(true);
+        filterPane.setVisible(false);
+        reportPane.setVisible(false);
+    }
+    @FXML
+    private void reportPaneActivate(){
+        mainMenuPane.setVisible(false);
+        filterPane.setVisible(false);
+        reportPane.setVisible(true);
+    }
+    @FXML
+    private void filterPaneActivate(){
+        mainMenuPane.setVisible(false);
+        filterPane.setVisible(true);
+        reportPane.setVisible(false);
+    }
     @FXML
     private void createReportButtonClick(){
         if(firstReportComboBox.getSelectionModel().getSelectedIndex()!=-1 &&
-                secondReportComboBox.getSelectionModel().getSelectedIndex()!=-1){
-            ReportTemplate report = new ReportTemplate();
-            report.showReport("flats.jrxml");
+                secondReportComboBox.getSelectionModel().getSelectedIndex()!=-1 &&
+                !fileNameTextField.getText().isEmpty()){
+            try {
+                String reportName;
+                String curDir = System.getProperty("user.dir");
+                DirectoryChooser directoryChooser = new DirectoryChooser();
+                File dir = directoryChooser.showDialog(createReportButton.getScene().getWindow());
+                switch(firstReportComboBox.getSelectionModel().getSelectedIndex()){
+                    case 0:{
+                        reportName = "/reports/buildings.jrxml";
+                        break;
+                    }
+                    case 1:{
+                        reportName = "/reports/flats.jrxml";
+                        break;
+                    }
+                    case 2:{
+                        reportName = "/reports/households.jrxml";
+                        break;
+                    }
+                    case 3:{
+                        reportName = "/reports/migrators.jrxml";
+                        break;
+                    }
+                    case 4:{
+                        reportName = "/reports/human_marriage.jrxml";
+                        break;
+                    }
+                    case 5:{
+                        reportName = "/reports/human_education.jrxml";
+                        break;
+                    }
+                    case 6:{
+                        reportName = "/reports/human_salaries.jrxml";
+                        break;
+                    }
+                    case 7:{
+                        reportName = "/reports/human_female.jrxml";
+                        break;
+                    }
+                    default:{
+                        reportName = "";
+                        break;
+                    }
+                }
+                String reportSource = curDir + "/src/main/resources" +  reportName;
+
+                JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
+
+                Connection conn = getMySQLConnection();
+
+                Map<String, Object> parameters = new HashMap<String, Object>();
+
+                JasperPrint print = JasperFillManager.fillReport(jasperReport,
+                        parameters, conn);
+
+                File outDir = new File(dir.getPath());
+                outDir.mkdirs();
+                switch (secondReportComboBox.getSelectionModel().getSelectedIndex()){
+                    case 0:{
+                        JRPdfExporter exporter = new JRPdfExporter();
+
+                        ExporterInput exporterInput = new SimpleExporterInput(print);
+                        exporter.setExporterInput(exporterInput);
+
+                        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                                outDir + "/" + fileNameTextField.getText() + ".pdf");
+                        exporter.setExporterOutput(exporterOutput);
+
+                        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+                        exporter.setConfiguration(configuration);
+                        exporter.exportReport();
+
+                        break;
+                    }
+                    case 1:{
+                        HtmlExporter exporter = new HtmlExporter();
+
+                        ExporterInput exporterInput = new SimpleExporterInput(print);
+                        exporter.setExporterInput(exporterInput);
+
+                        SimpleHtmlExporterOutput exporterOutput = new SimpleHtmlExporterOutput(
+                                outDir + "/" + fileNameTextField.getText() + ".html");
+                        exporter.setExporterOutput(exporterOutput);
+
+                        SimpleHtmlExporterConfiguration configuration = new SimpleHtmlExporterConfiguration();
+                        exporter.setConfiguration(configuration);
+                        exporter.exportReport();
+
+                        break;
+                    }
+                    case 2:{
+                        JRDocxExporter exporter = new JRDocxExporter();
+
+                        ExporterInput exporterInput = new SimpleExporterInput(print);
+                        exporter.setExporterInput(exporterInput);
+
+                        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
+                                outDir + "/" + fileNameTextField.getText() + ".docx");
+                        exporter.setExporterOutput(exporterOutput);
+
+                        SimpleDocxExporterConfiguration configuration = new SimpleDocxExporterConfiguration();
+                        exporter.setConfiguration(configuration);
+                        exporter.exportReport();
+
+                        break;
+                    }
+                    case 3:{
+                        JRXmlExporter exporter = new JRXmlExporter();
+
+                        ExporterInput exporterInput = new SimpleExporterInput(print);
+                        exporter.setExporterInput(exporterInput);
+
+                        SimpleXmlExporterOutput exporterOutput = new SimpleXmlExporterOutput(
+                                outDir + "/" + fileNameTextField.getText() + ".xml");
+                        exporter.setExporterOutput(exporterOutput);
+
+                        exporter.exportReport();
+
+                        break;
+                    }
+                }
+
+            } catch (JRException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally{
+
+            }
         }
     }
     @FXML

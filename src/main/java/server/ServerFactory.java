@@ -47,6 +47,9 @@ public class ServerFactory implements Runnable {
                     dbConnection.updateConnection();
                     break;
                 }
+                case "report":{
+
+                }
                 default: {
                     throw new IllegalArgumentException("Неверная команда");
                 }

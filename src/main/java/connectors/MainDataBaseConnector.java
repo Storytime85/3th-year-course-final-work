@@ -67,6 +67,10 @@ public class MainDataBaseConnector {
         return salaries;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
     public int getLastSalary(){
         dbSalariestableEntity temp = (dbSalariestableEntity) salaries.get(salaries.size()-1);
         return temp.getSalaryId();
